@@ -1,4 +1,4 @@
-# Gravity something
+# Gravity Ninja
 
 ## A hyper casual gravity based game
 
