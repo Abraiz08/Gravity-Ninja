@@ -23,7 +23,7 @@ public class TerminalGame {
     private Game game;
 
     private Screen screen;
-    private WindowBasedTextGUI endGUI;
+    private WindowBasedTextGUI endGui;
 
 
     /**
@@ -38,7 +38,7 @@ public class TerminalGame {
 
         game = new Game(
 
-                terminalSize.getColumns() - 1,
+                terminalSize.getColumns(),
                 // first row is reserved for us
                 terminalSize.getRows() - 2
         );
@@ -83,22 +83,26 @@ public class TerminalGame {
     private void handleUserInput() throws IOException {
         KeyStroke stroke = screen.pollInput();
 
+
         if (stroke == null) {
             return;
         }
 
-        if (stroke.getCharacter() != null) {
-            return;
-        }
 
         //TODO
         //Implement moving
-        if (stroke.getCharacter() == ' ') {
-            game.getPlayer().jump();
+        if (stroke.getCharacter() == null) {
+
+            game.getPlayer().move(stroke.getKeyType(),game);
+
         } else if (stroke.getCharacter() == 'x') {
+
             game.getGravity().flipGravity();
-        } else {
-            game.getPlayer().move(stroke.getKeyType());
+
+
+        } else if (stroke.getCharacter() == ' ') {
+
+            game.getPlayer().jump(game);
 
         }
     }
@@ -120,7 +124,7 @@ public class TerminalGame {
         drawScore();
         drawPlayer();
         drawPoints();
-        drawObstacles();
+        //drawObstacles();
     }
 
     private void drawEndScreen() {
@@ -146,30 +150,32 @@ public class TerminalGame {
 
     private void drawPlayer() {
         PlayerCharacter player = game.getPlayer();
-
-        drawPosition(player.getPosition(), TextColor.ANSI.GREEN, '\u2588', true);
+        drawPosition(player.getPos(), TextColor.ANSI.GREEN, '\u2588');
 
     }
 
     private void drawPoints() {
         for (Position points : game.getPoints()) {
-            drawPosition(points, TextColor.ANSI.RED, '\u2B24', false);
+            drawPosition(points, TextColor.ANSI.RED, '\u2B24');
         }
     }
-
+/*
     private void drawObstacles() {
         for (Position obstacles : game.getObstacles()) {
             drawPosition(obstacles, TextColor.ANSI.RED, '\u2B24', false);
         }
     }
 
+ */
+
     /**
      * Draws a character in a given position on the terminal.
      */
-    private void drawPosition(Position pos, TextColor color, char c, boolean wide) {
+    private void drawPosition(Position pos, TextColor color, char c) {
         TextGraphics text = screen.newTextGraphics();
         text.setForegroundColor(color);
-        text.putString(pos.getX() , pos.getY() + 1, String.valueOf(c));
+        text.putString(pos.getX(), pos.getY() + 1, String.valueOf(c));
 
+    }
 }
 

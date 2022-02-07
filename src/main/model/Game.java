@@ -12,9 +12,9 @@ import java.util.concurrent.ThreadLocalRandom;
 //some variable names are taken from the SnakeGame example provided to us
 public class Game {
 
-    public static final int TICKS_PER_SECOND = 10;
-    private final PlayerCharacter player = new PlayerCharacter();
-    private final Gravity gravity = new Gravity();
+    public static final int TICKS_PER_SECOND = 24;
+    private final PlayerCharacter player;
+    private final Gravity gravity;
 
     private final Set<Position> points = new HashSet<>();
     private int score = 0;
@@ -27,6 +27,8 @@ public class Game {
     public Game(int maxX, int maxY) {
         this.maxX = maxX;
         this.maxY = maxY;
+        gravity = new Gravity(-1);
+        player = new PlayerCharacter(0, maxY);
 
         points.add(generateRandomPosition());
     }
@@ -36,9 +38,13 @@ public class Game {
      */
 
     public void tick() {
+        /*
         if (player.hasCollidedWithObstacle()) {
             ended = true;
         }
+         */
+
+        player.pull(gravity.getGravDirection(), maxY);
 
         handlePoints();
 
@@ -46,6 +52,8 @@ public class Game {
             spawnPoints();
         }
     }
+
+
 
     /**
      * Spawns a point into a valid position in the game
@@ -90,16 +98,16 @@ public class Game {
      * increases score if point is collected
      */
     private void handlePoints() {
-        Position eatenFood = points.stream()
+        Position collectedPoints = points.stream()
                 .filter(player::hasCollided)
                 .findFirst()
                 .orElse(null);
 
-        if (eatenFood == null) {
+        if (collectedPoints == null) {
             return;
         }
 
-        points.remove(collectedPoint);
+        points.remove(collectedPoints);
         score++;
 
     }
