@@ -64,7 +64,14 @@ public class TerminalGame {
      * ticking the game internally, and rendering the effects
      */
     private void tick() throws IOException {
+
         handleUserInput();
+
+        if (game.getPlayer().getPos().getY() == 0 || game.getPlayer().getPos().getY() == game.getMaxY()) {
+            game.getPlayer().setMaxJumpsToOne();
+        }
+
+        handleGravitating();
 
         game.tick();
 
@@ -89,8 +96,6 @@ public class TerminalGame {
         }
 
 
-        //TODO
-        //Implement moving
         if (stroke.getCharacter() == null) {
 
             game.getPlayer().move(stroke.getKeyType(),game);
@@ -99,13 +104,34 @@ public class TerminalGame {
 
             game.getGravity().flipGravity();
 
+//double jump
+        } else if (game.getPlayer().getPos().getY() != 0
+                && game.getPlayer().getPos().getY() != game.getMaxY()
+                && stroke.getCharacter() == ' '
+                && game.getPlayer().getMaxJumps() != 0) {
+            game.getPlayer().jump(game);
+            game.getPlayer().setMaxJumpsToZero();
+            System.out.println(game.getPlayer().getMaxJumps());
 
-        } else if (stroke.getCharacter() == ' ') {
 
+
+        } else if (stroke.getCharacter() == ' '
+                   && game.getPlayer().getPos().getY() == 0
+                   || game.getPlayer().getPos().getY() == game.getMaxY()) {
             game.getPlayer().jump(game);
 
+
         }
+
+
+
+
+
+
     }
+
+
+
 
     /**
      * Renders the current screen.
@@ -175,6 +201,10 @@ public class TerminalGame {
         TextGraphics text = screen.newTextGraphics();
         text.setForegroundColor(color);
         text.putString(pos.getX(), pos.getY() + 1, String.valueOf(c));
+
+    }
+
+    private void handleGravitating() {
 
     }
 }

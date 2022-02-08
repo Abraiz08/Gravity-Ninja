@@ -9,7 +9,7 @@ public class PlayerCharacter {
 
     private final int playerJumpHeight = 10;
     private final int playerMovementSpeed = 2;
-    private final int maxJumps = 2;
+    private int maxJumps = 1;
 
     private Position pos;
 
@@ -83,51 +83,79 @@ public class PlayerCharacter {
                     pos.getX(),
                     pos.getY() + 5
             );
+
         } else if (pos.getY() == game.getMaxY()) {
             pos = new Position(
                     pos.getX(),
                     pos.getY() - 5
             );
-        }
 
+        } else if (game.getGravity().getGravDirection() == -1) {
+            pos = new Position(
+                    pos.getX(),
+                    pos.getY() - 5
+            );
+
+        } else if (game.getGravity().getGravDirection() == 1) {
+            pos = new Position(
+                    pos.getX(),
+                    pos.getY() + 5
+            );
+
+
+        }
     }
 
     public void pull(int gravDirection, int maxY) {
 
-        switch (gravDirection) {
+        if (gravDirection == 1) {
+            if (pos.getY() != 0) {
 
-            case 1:
+                pos = new Position(
+                        pos.getX(),
+                        pos.getY() - 1
+                );
 
-                if (pos.getY() != 0) {
-                    pos = new Position(
-                            pos.getX(),
-                            pos.getY() - 1
+            }
+        } else {
+
+            if (pos.getY() != maxY) {
+
+                pos = new Position(
+                        pos.getX(),
+                        pos.getY() + 1
                     );
-                }
 
-            case -1:
-
-
-                if (pos.getY() != maxY) {
-                    pos = new Position(
-                           pos.getX(),
-                            pos.getY() + 1
-                    );
-                }
-
-
-
+            }
         }
+
+
+
     }
+
 
     public boolean hasCollided(Position p) {
         return pos.equals(p);
     }
 
+    public void setMaxJumpsToZero() {
+        maxJumps = 0;
+    }
+
+    public void setMaxJumpsToOne() {
+        maxJumps = 1;
+    }
+
+
 
 
     public Position getPos() {
         return pos;
+
+    }
+
+    public int getMaxJumps() {
+        return maxJumps;
     }
 
 }

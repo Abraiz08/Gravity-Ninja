@@ -3,9 +3,11 @@ package model;
 public class Gravity {
 
     private int gravDirection;
+    private boolean gravitating;
 
     public Gravity(int gravDirection) {
         this.gravDirection = gravDirection;
+        gravitating = false;
     }
 
 
@@ -20,6 +22,14 @@ public class Gravity {
         }
 
 
+    }
+
+    public void isGravitating() {
+        gravitating = true;
+    }
+
+    public void noLongerGravitating() {
+        gravitating = false;
     }
 
     public int getGravDirection() {

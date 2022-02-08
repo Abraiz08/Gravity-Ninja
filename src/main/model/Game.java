@@ -12,7 +12,7 @@ import java.util.concurrent.ThreadLocalRandom;
 //some variable names are taken from the SnakeGame example provided to us
 public class Game {
 
-    public static final int TICKS_PER_SECOND = 24;
+    public static final int TICKS_PER_SECOND = 20;
     private final PlayerCharacter player;
     private final Gravity gravity;
 
