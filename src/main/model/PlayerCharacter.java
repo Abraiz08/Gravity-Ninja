@@ -7,8 +7,8 @@ import com.googlecode.lanterna.input.KeyType;
  */
 public class PlayerCharacter {
 
-    private final int playerJumpHeight = 10;
-    private final int playerMovementSpeed = 2;
+    private final int playerJumpHeight = 6;
+    private final int playerMovementSpeed = 1;
     private int maxJumps = 1;
 
     private Position pos;
@@ -81,25 +81,25 @@ public class PlayerCharacter {
         if (pos.getY() == 0) {
             pos = new Position(
                     pos.getX(),
-                    pos.getY() + 5
+                    pos.getY() + playerJumpHeight
             );
 
         } else if (pos.getY() == game.getMaxY()) {
             pos = new Position(
                     pos.getX(),
-                    pos.getY() - 5
+                    pos.getY() - playerJumpHeight
             );
 
         } else if (game.getGravity().getGravDirection() == -1) {
             pos = new Position(
                     pos.getX(),
-                    pos.getY() - 5
+                    pos.getY() - playerJumpHeight
             );
 
         } else if (game.getGravity().getGravDirection() == 1) {
             pos = new Position(
                     pos.getX(),
-                    pos.getY() + 5
+                    pos.getY() + playerJumpHeight
             );
 
 
@@ -135,7 +135,7 @@ public class PlayerCharacter {
 
 
     public boolean hasCollided(Position p) {
-        return pos.equals(p);
+        return ((pos.getX() == p.getX()) && (pos.getY() == p.getY()));
     }
 
     public void setMaxJumpsToZero() {
@@ -146,6 +146,19 @@ public class PlayerCharacter {
         maxJumps = 1;
     }
 
+    public void pushUp() {
+        pos = pos = new Position(
+                pos.getX(),
+                pos.getY() - 1
+        );
+    }
+
+    public void pushDown() {
+        pos = new Position(
+                pos.getX(),
+                pos.getY() + 1
+        );
+    }
 
 
 

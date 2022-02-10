@@ -5,6 +5,7 @@ public class Gravity {
     private int gravDirection;
     private boolean gravitating;
 
+
     public Gravity(int gravDirection) {
         this.gravDirection = gravDirection;
         gravitating = false;
@@ -14,10 +15,11 @@ public class Gravity {
     public void flipGravity() {
         if (gravDirection == -1) {
             gravDirection = 1;
-            System.out.println(gravDirection);
+            isGravitating();
+
         } else if (gravDirection == 1) {
             gravDirection = -1;
-            System.out.println(gravDirection);
+            isGravitating();
 
         }
 
@@ -30,6 +32,10 @@ public class Gravity {
 
     public void noLongerGravitating() {
         gravitating = false;
+    }
+
+    public boolean getGravitating() {
+        return gravitating;
     }
 
     public int getGravDirection() {

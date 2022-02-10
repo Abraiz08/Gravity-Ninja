@@ -12,7 +12,9 @@ import java.util.concurrent.ThreadLocalRandom;
 //some variable names are taken from the SnakeGame example provided to us
 public class Game {
 
-    public static final int TICKS_PER_SECOND = 20;
+    public static final int TICKS_PER_SECOND = 60;
+
+    private int ticker;
     private final PlayerCharacter player;
     private final Gravity gravity;
 
@@ -27,8 +29,11 @@ public class Game {
     public Game(int maxX, int maxY) {
         this.maxX = maxX;
         this.maxY = maxY;
+
         gravity = new Gravity(-1);
         player = new PlayerCharacter(0, maxY);
+
+        ticker = 0;
 
         points.add(generateRandomPosition());
     }
@@ -38,18 +43,28 @@ public class Game {
      */
 
     public void tick() {
+        ticker++;
         /*
         if (player.hasCollidedWithObstacle()) {
             ended = true;
         }
          */
 
-        player.pull(gravity.getGravDirection(), maxY);
+
+        if ((ticker % (TICKS_PER_SECOND / 20)) == 0) {
+            player.pull(gravity.getGravDirection(), maxY);
+            ticker = 0;
+        }
 
         handlePoints();
 
         if (points.isEmpty()) {
             spawnPoints();
+
+        }
+
+        if (ticker > TICKS_PER_SECOND) {
+            ticker = 0;
         }
     }
 

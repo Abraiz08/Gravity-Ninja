@@ -21,9 +21,10 @@ a casual game such as this will allow me to understand what makes game enjoyable
 
 
 ## User Story:
-- As a user, I want to avoid obstacles that are added to the list of obstacles and appear in the arena.
+- As a user, I want to avoid obstacles that appear in the arena, these obstacles added to a list of obstacles moving 
+around the arena.
 - As a user, I want to be able to jump and double jump.
-  - As a user, I want to be able to flip the gravity of the arena.
+- As a user, I want to be able to flip the gravity of the arena.
 - As a user, I want to be able to move left and right across the arena floor, or the ceiling depending on the direction 
 of gravity
 - As a user, I want to be able to collect points that appear in the arena and increase my score.

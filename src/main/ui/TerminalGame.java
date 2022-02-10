@@ -26,6 +26,9 @@ public class TerminalGame {
     private WindowBasedTextGUI endGui;
 
 
+
+    //TODO fix prevent mid air jump
+
     /**
      * Begins the game and method does not leave execution
      * until game is complete.
@@ -67,11 +70,9 @@ public class TerminalGame {
 
         handleUserInput();
 
-        if (game.getPlayer().getPos().getY() == 0 || game.getPlayer().getPos().getY() == game.getMaxY()) {
-            game.getPlayer().setMaxJumpsToOne();
-        }
+        resetDoubleJump();
 
-        handleGravitating();
+        handleGravitating(game.getPlayer().getPos().getY());
 
         game.tick();
 
@@ -82,6 +83,7 @@ public class TerminalGame {
 
         screen.setCursorPosition(new TerminalPosition(screen.getTerminalSize().getColumns() - 1, 0));
     }
+
 
     /**
      * Sets the snake's direction corresponding to the
@@ -101,36 +103,62 @@ public class TerminalGame {
             game.getPlayer().move(stroke.getKeyType(),game);
 
         } else if (stroke.getCharacter() == 'x') {
-
+            preventMidAirJump();
             game.getGravity().flipGravity();
+
+
+
 
 //double jump
         } else if (game.getPlayer().getPos().getY() != 0
                 && game.getPlayer().getPos().getY() != game.getMaxY()
                 && stroke.getCharacter() == ' '
                 && game.getPlayer().getMaxJumps() != 0) {
-            game.getPlayer().jump(game);
             game.getPlayer().setMaxJumpsToZero();
+            game.getPlayer().jump(game);
             System.out.println(game.getPlayer().getMaxJumps());
 
 
 
         } else if (stroke.getCharacter() == ' '
-                   && game.getPlayer().getPos().getY() == 0
-                   || game.getPlayer().getPos().getY() == game.getMaxY()) {
+                   && (game.getPlayer().getPos().getY() == 0
+                   || game.getPlayer().getPos().getY() == game.getMaxY())) {
             game.getPlayer().jump(game);
 
 
         }
 
 
+    }
 
+    private void resetDoubleJump() {
+        if (game.getPlayer().getPos().getY() == 0 || game.getPlayer().getPos().getY() == game.getMaxY()
+                && game.getGravity().getGravitating() == false) {
+            game.getPlayer().setMaxJumpsToOne();
+        }
+    }
 
+    private void handleGravitating(int posY) {
+        if (game.getGravity().getGravitating() == true && (posY == 0
+                || posY == game.getMaxY())) {
 
+            game.getGravity().noLongerGravitating();
+
+        }
 
     }
 
+    private void preventMidAirJump() {
+        if (game.getGravity().getGravDirection() == -1) {
 
+            game.getPlayer().pushUp();
+
+        } else if (game.getGravity().getGravDirection() == 1) {
+
+            game.getPlayer().pushDown();
+
+        }
+    }
 
 
     /**
@@ -148,8 +176,8 @@ public class TerminalGame {
         }
 
         drawScore();
-        drawPlayer();
         drawPoints();
+        drawPlayer();
         //drawObstacles();
     }
 
@@ -204,8 +232,6 @@ public class TerminalGame {
 
     }
 
-    private void handleGravitating() {
 
-    }
 }
 
