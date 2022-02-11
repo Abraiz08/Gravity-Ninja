@@ -13,13 +13,21 @@ public class PlayerCharacter {
 
     private Position pos;
 
-
-
+    /*
+     * REQUIRES: int x and int y should be greater than 0 and less
+     * than maxX and maxY respectively,as defined in the Game class
+     * EFFECTS: Constructs a PlayerCharacter with its X coordinate
+     * equal to x and its Y coordinate equal to y
+     */
     public PlayerCharacter(int x, int y) {
         pos = new Position(x, y);
     }
 
-
+    /*
+     * REQUIRES:
+     * MODIFIES:
+     * EFFECTS:
+     */
     public void move(KeyType key, Game game) {
 
         int x = game.getPlayer().getPos().getX();
@@ -51,7 +59,11 @@ public class PlayerCharacter {
 
     }
 
-
+    /*
+     * REQUIRES:
+     * MODIFIES:
+     * EFFECTS:
+     */
     public int updateX(int x, Game game, int direction) {
         switch (direction) {
             case 1:
@@ -75,7 +87,11 @@ public class PlayerCharacter {
     }
 
 
-
+    /*
+     * REQUIRES:
+     * MODIFIES:
+     * EFFECTS:
+     */
     public void jump(Game game) {
 
         if (pos.getY() == 0) {
@@ -106,7 +122,24 @@ public class PlayerCharacter {
         }
     }
 
-    public void pull(int gravDirection, int maxY) {
+    /*
+     * REQUIRES:
+     * MODIFIES:
+     * EFFECTS:
+     */
+    public void resetDoubleJump(Game game) {
+        if (game.getPlayer().getPos().getY() == 0 || game.getPlayer().getPos().getY() == game.getMaxY()
+                && game.getGravity().getGravitating() == false) {
+            game.getPlayer().setMaxJumpsToOne();
+        }
+    }
+
+    /*
+     * REQUIRES:
+     * MODIFIES:
+     * EFFECTS:
+     */
+    public void getPulledByGravity(int gravDirection, int maxY) {
 
         if (gravDirection == 1) {
             if (pos.getY() != 0) {
@@ -128,12 +161,13 @@ public class PlayerCharacter {
 
             }
         }
-
-
-
     }
 
-
+    /*
+     * REQUIRES:
+     * MODIFIES:
+     * EFFECTS:
+     */
     public boolean hasCollided(Position p) {
         return ((pos.getX() == p.getX()) && (pos.getY() == p.getY()));
     }
@@ -146,25 +180,8 @@ public class PlayerCharacter {
         maxJumps = 1;
     }
 
-    public void pushUp() {
-        pos = pos = new Position(
-                pos.getX(),
-                pos.getY() - 1
-        );
-    }
-
-    public void pushDown() {
-        pos = new Position(
-                pos.getX(),
-                pos.getY() + 1
-        );
-    }
-
-
-
     public Position getPos() {
         return pos;
-
     }
 
     public int getMaxJumps() {

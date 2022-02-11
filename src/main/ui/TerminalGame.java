@@ -9,38 +9,41 @@ import com.googlecode.lanterna.gui2.WindowBasedTextGUI;
 import com.googlecode.lanterna.gui2.dialogs.MessageDialogBuilder;
 import com.googlecode.lanterna.gui2.dialogs.MessageDialogButton;
 import com.googlecode.lanterna.input.KeyStroke;
-import com.googlecode.lanterna.input.KeyType;
 import com.googlecode.lanterna.screen.Screen;
 import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
-import com.sun.xml.internal.bind.v2.TODO;
 import model.Game;
+import model.Obstacle;
 import model.PlayerCharacter;
 import model.Position;
 
 import java.io.IOException;
 
+/**
+ * Class representing the user interface of the game
+ */
 public class TerminalGame {
     private Game game;
 
     private Screen screen;
     private WindowBasedTextGUI endGui;
 
-
-
-    //TODO fix prevent mid air jump
-
     /**
      * Begins the game and method does not leave execution
      * until game is complete.
      */
+    /*
+     * REQUIRES:
+     * MODIFIES:
+     * EFFECTS:
+     */
     public void start() throws IOException, InterruptedException {
+
         screen = new DefaultTerminalFactory().createScreen();
         screen.startScreen();
 
         TerminalSize terminalSize = screen.getTerminalSize();
 
         game = new Game(
-
                 terminalSize.getColumns(),
                 // first row is reserved for us
                 terminalSize.getRows() - 2
@@ -52,6 +55,11 @@ public class TerminalGame {
     /**
      * Begins the game cycle. Ticks once every Game.TICKS_PER_SECOND until
      * game has ended and the endGui has been exited.
+     */
+    /*
+     * REQUIRES:
+     * MODIFIES:
+     * EFFECTS:
      */
     private void beginTicks() throws IOException, InterruptedException {
         while (!game.isEnded() || endGui.getActiveWindow() != null) {
@@ -66,11 +74,16 @@ public class TerminalGame {
      * Handles one cycle in the game by taking user input,
      * ticking the game internally, and rendering the effects
      */
+    /*
+     * REQUIRES:
+     * MODIFIES:
+     * EFFECTS:
+     */
     private void tick() throws IOException {
 
         handleUserInput();
 
-        resetDoubleJump();
+        game.getPlayer().resetDoubleJump(game);
 
         handleGravitating(game.getPlayer().getPos().getY());
 
@@ -89,6 +102,11 @@ public class TerminalGame {
      * Sets the snake's direction corresponding to the
      * user's keystroke
      */
+    /*
+     * REQUIRES:
+     * MODIFIES:
+     * EFFECTS:
+     */
     private void handleUserInput() throws IOException {
         KeyStroke stroke = screen.pollInput();
 
@@ -103,7 +121,6 @@ public class TerminalGame {
             game.getPlayer().move(stroke.getKeyType(),game);
 
         } else if (stroke.getCharacter() == 'x') {
-            preventMidAirJump();
             game.getGravity().flipGravity();
 
 
@@ -116,8 +133,6 @@ public class TerminalGame {
                 && game.getPlayer().getMaxJumps() != 0) {
             game.getPlayer().setMaxJumpsToZero();
             game.getPlayer().jump(game);
-            System.out.println(game.getPlayer().getMaxJumps());
-
 
 
         } else if (stroke.getCharacter() == ' '
@@ -131,40 +146,28 @@ public class TerminalGame {
 
     }
 
-    private void resetDoubleJump() {
-        if (game.getPlayer().getPos().getY() == 0 || game.getPlayer().getPos().getY() == game.getMaxY()
-                && game.getGravity().getGravitating() == false) {
-            game.getPlayer().setMaxJumpsToOne();
-        }
-    }
-
+    /*
+     * REQUIRES:
+     * MODIFIES:
+     * EFFECTS:
+     */
     private void handleGravitating(int posY) {
-        if (game.getGravity().getGravitating() == true && (posY == 0
+        if (game.getGravity().getGravitating()  && (posY == 0
                 || posY == game.getMaxY())) {
 
             game.getGravity().noLongerGravitating();
-
-        }
-
-    }
-
-    private void preventMidAirJump() {
-        if (game.getGravity().getGravDirection() == -1) {
-
-            game.getPlayer().pushUp();
-
-        } else if (game.getGravity().getGravDirection() == 1) {
-
-            game.getPlayer().pushDown();
-
         }
     }
-
 
     /**
      * Renders the current screen.
      * Draws the end screen if the game has ended, otherwise
      * draws the score, player, points and obstacles.
+     */
+    /*
+     * REQUIRES:
+     * MODIFIES:
+     * EFFECTS:
      */
     private void render() {
         if (game.isEnded()) {
@@ -178,20 +181,30 @@ public class TerminalGame {
         drawScore();
         drawPoints();
         drawPlayer();
-        //drawObstacles();
+        drawObstacles();
     }
 
+    /*
+     * REQUIRES:
+     * MODIFIES:
+     * EFFECTS:
+     */
     private void drawEndScreen() {
         endGui = new MultiWindowTextGUI(screen);
 
         new MessageDialogBuilder()
                 .setTitle("DEAD")
-                .setText("Your Score" + game.getScore() + "!")
+                .setText("Your Score: " + game.getScore())
                 .addButton(MessageDialogButton.Close)
                 .build()
                 .showDialog(endGui);
     }
 
+    /*
+     * REQUIRES:
+     * MODIFIES:
+     * EFFECTS:
+     */
     private void drawScore() {
         TextGraphics text = screen.newTextGraphics();
         text.setForegroundColor(TextColor.ANSI.GREEN);
@@ -202,28 +215,53 @@ public class TerminalGame {
         text.putString(8, 0, String.valueOf(game.getScore()));
     }
 
+    /*
+     * REQUIRES:
+     * MODIFIES:
+     * EFFECTS:
+     */
     private void drawPlayer() {
         PlayerCharacter player = game.getPlayer();
-        drawPosition(player.getPos(), TextColor.ANSI.GREEN, '\u2588');
+        drawPosition(player.getPos(), TextColor.ANSI.GREEN, '█');
 
     }
 
+    /*
+     * REQUIRES:
+     * MODIFIES:
+     * EFFECTS:
+     */
     private void drawPoints() {
         for (Position points : game.getPoints()) {
-            drawPosition(points, TextColor.ANSI.RED, '\u2B24');
-        }
-    }
-/*
-    private void drawObstacles() {
-        for (Position obstacles : game.getObstacles()) {
-            drawPosition(obstacles, TextColor.ANSI.RED, '\u2B24', false);
+            drawPosition(points, TextColor.ANSI.CYAN, '◆');
         }
     }
 
- */
+    /*
+     * REQUIRES:
+     * MODIFIES:
+     * EFFECTS:
+     */
+    private void drawObstacles() {
+        for (Obstacle obstacle : game.getObstacles()) {
+            if (obstacle.getObstacleDirection().equals("right")
+                    || obstacle.getObstacleDirection().equals("left")) {
+                drawPosition(obstacle.getPos(), TextColor.ANSI.RED, '█');
+            } else {
+                drawPosition(obstacle.getPos(), TextColor.ANSI.YELLOW, '█');
+            }
+        }
+    }
+
+
 
     /**
      * Draws a character in a given position on the terminal.
+     */
+    /*
+     * REQUIRES:
+     * MODIFIES:
+     * EFFECTS:
      */
     private void drawPosition(Position pos, TextColor color, char c) {
         TextGraphics text = screen.newTextGraphics();
