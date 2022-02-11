@@ -34,6 +34,15 @@ public class Game {
     private final int maxX;
     private final int maxY;
 
+    /*
+     * MODIFIES: this
+     * EFFECTS: maxX and maxY are set to the biggest values of x and y on the terminal
+     * An object of type Gravity, gravity is created and the gravDirection is set to be -1
+     * An object of type PlayerCharacter, player is created and its position is set to be (0, maxY)
+     * ticker is given a value of 0
+     * A point is added to a random valid position on the game screen
+     * secondsPassed is given a value of 0
+     */
     public Game(int maxX, int maxY) {
         this.maxX = maxX;
         this.maxY = maxY;
@@ -48,13 +57,17 @@ public class Game {
         secondsPassed = 0;
     }
 
-    /**
-     * Progresses the game state and handles points
-     */
     /*
-     * REQUIRES:
-     * MODIFIES:
-     * EFFECTS:
+     * MODIFIES: this
+     * EFFECTS: Performs a number of actions for each tick in the game and progresses the game state
+     * ticker is incremented by 1 each tick
+     * gravity is applied to the player to pull them up or down
+     * Detects if the player has collided with any obstacles on the screen
+     * Every obstacle in obstacles is moved depending on its speed and direction
+     * Handles the points collected, and adds the points to the score
+     * If there are no points on the screen, a new point is spawned on the game screen
+     * Counts how many seconds have passed since the game started
+     * Spawns obstacles for the player to dodge on the game screen.
      */
     public void tick() {
 
@@ -79,9 +92,8 @@ public class Game {
     }
 
     /*
-     * REQUIRES:
-     * MODIFIES:
-     * EFFECTS:
+     * MODIFIES: this
+     * EFFECTS: Moves every obstacle in the list obstacles once every 5 ticks
      */
     private void moveAllObstacles() {
         if (ticker % 5 == 0) {
@@ -92,21 +104,20 @@ public class Game {
     }
 
     /*
-     * REQUIRES:
-     * MODIFIES:
-     * EFFECTS:
+     * MODIFIES: this
+     * EFFECTS: Applies the effect of gravity on the player once every 3 ticks
      */
     private void applyGravity() {
-        if ((ticker % (TICKS_PER_SECOND / 20)) == 0) {
+        if ((ticker % 3) == 0) {
             player.getPulledByGravity(gravity.getGravDirection(), maxY);
 
         }
     }
 
     /*
-     * REQUIRES:
-     * MODIFIES:
-     * EFFECTS:
+     * MODIFIES: this
+     * EFFECTS: Counts the number of seconds passed since the game started
+     * Resets the ticker to 0 every second
      */
     private void countSeconds() {
         if (ticker > TICKS_PER_SECOND) {
@@ -117,9 +128,9 @@ public class Game {
     }
 
     /*
-     * REQUIRES:
-     * MODIFIES:
-     * EFFECTS:
+     * MODIFIES: this
+     * EFFECTS: Prevents obstacles from being spawned in the arena continuously by setting canSpawnObstacle to false,
+     * instead limiting the spawning to approximately once every 1.5 seconds
      */
     public void obstacleGate() {
         if ((int)(secondsPassed % 1.5) == 0) {
@@ -131,9 +142,9 @@ public class Game {
     }
 
     /*
-     * REQUIRES:
-     * MODIFIES:
-     * EFFECTS:
+     * MODIFIES: this
+     * EFFECTS: Checks if the player has collided with (has the same position as) any obstacle
+     * in the list obstacles. If true, the game is ended.
      */
     private void detectObstacleCollision() {
         for (Obstacle obstacle : obstacles) {
@@ -143,15 +154,11 @@ public class Game {
         }
     }
 
-
-    /**
-     * Spawns a point into a valid position in the game
-     */
     /*
-     * REQUIRES:
-     * MODIFIES:
-     * EFFECTS:
+     * MODIFIES: this
+     * EFFECTS: Spawns a point into a valid position in the game
      */
+    //found in SnakeConsole-Lanterna Project
     public void spawnPoints() {
 
         Position pos = generateRandomPosition();
@@ -163,16 +170,11 @@ public class Game {
         points.add(pos);
     }
 
-
-    /**
-     * Returns whether a given position is
+    /*
+     * EFFECTS: Returns whether a given position is
      * out of the game frame
      */
-    /*
-     * REQUIRES:
-     * MODIFIES:
-     * EFFECTS:
-     */
+    //found in SnakeConsole-Lanterna Project
     public boolean isOutOfBounds(Position pos) {
         return pos.getX() < 0
                 || pos.getY() < 0
@@ -180,15 +182,12 @@ public class Game {
                 || pos.getY() > maxY;
     }
 
-    /**
-     * Returns whether a given position is in bounds
+
+    /*
+     * EFFECTS: Returns whether a given position is in bounds
      * and not already occupied
      */
-    /*
-     * REQUIRES:
-     * MODIFIES:
-     * EFFECTS:
-     */
+    //found in SnakeConsole-Lanterna Project
     public boolean isValidPosition(Position pos) {
         return  !isOutOfBounds(pos)
                 && !points.contains(pos)
@@ -196,9 +195,9 @@ public class Game {
     }
 
     /*
-     * REQUIRES:
-     * MODIFIES:
-     * EFFECTS:
+     * EFFECTS: Returns whether a given position is in bounds, not already occupied,
+     * and valid for an obstacle to spawn in. A position is valid for an obstacle to spawn in if
+     * it's near the edges of the game frame.
      */
     public boolean isValidPositionForObstacle(Position pos) {
         return  isValidPosition(pos)
@@ -208,15 +207,12 @@ public class Game {
               || (pos.getX() > maxX - 5)));
     }
 
-    /**
-     * Checks for points that the player has collected,
+    /*
+     * MODIFIES: this
+     * EFFECTS: Checks for points that the player has collected,
      * increases score if point is collected
      */
-    /*
-     * REQUIRES:
-     * MODIFIES:
-     * EFFECTS:
-     */
+    //found in SnakeConsole-Lanterna Project
     private void handlePoints() {
         Position collectedPoints = points.stream()
                 .filter(player::hasCollided)
@@ -233,9 +229,9 @@ public class Game {
     }
 
     /*
-     * REQUIRES:
-     * MODIFIES:
-     * EFFECTS:
+     * MODIFIES: this
+     * EFFECTS: Spawns a random number of obstacles based on the formula
+     * 1 + ((Math.random() * 10) / 1.5)
      */
     private void spawnObstacles() {
         double decider = 1 + ((Math.random() * 10) / 1.5);
@@ -245,9 +241,9 @@ public class Game {
     }
 
     /*
-     * REQUIRES:
-     * MODIFIES:
-     * EFFECTS:
+     * MODIFIES: this
+     * EFFECTS: Spawns an obstacle in a valid position on the game screen, if ticker == TICKS_PER_SECOND and
+     * canSpawnObstacles is true
      */
     private void spawnObstacle() {
         Position pos = generateRandomPosition();
@@ -263,16 +259,11 @@ public class Game {
 
     }
 
-
-    /**
-     * Generates a random position.
+    /*
+     * EFFECTS: Generates a random position.
      * Guaranteed to be in bounds but not necessarily valid
      */
-    /*
-     * REQUIRES:
-     * MODIFIES:
-     * EFFECTS:
-     */
+    //found in SnakeConsole-Lanterna Project
     private Position generateRandomPosition() {
         return new Position(
                 ThreadLocalRandom.current().nextInt(maxX),
@@ -283,7 +274,6 @@ public class Game {
     public PlayerCharacter getPlayer() {
         return player;
     }
-
 
     public Set<Position> getPoints() {
         return points;

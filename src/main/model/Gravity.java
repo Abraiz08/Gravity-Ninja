@@ -9,9 +9,8 @@ public class Gravity {
     private boolean gravitating;
 
     /*
-     * REQUIRES:
-     * MODIFIES:
-     * EFFECTS:
+     * MODIFIES: this
+     * EFFECTS: Assigns a gravDirection to this.gravDirection and sets gravitating to false
      */
     public Gravity(int gravDirection) {
         this.gravDirection = gravDirection;
@@ -19,9 +18,9 @@ public class Gravity {
     }
 
     /*
-     * REQUIRES:
-     * MODIFIES:
-     * EFFECTS:
+     * REQUIRES: gravDirection is either 1 or -1
+     * MODIFIES: this
+     * EFFECTS: Flips the gravity of the game arena, and sets gravitating to true
      */
     public void flipGravity() {
         if (gravDirection == -1) {

@@ -15,7 +15,9 @@ public class PlayerCharacter {
 
     /*
      * REQUIRES: int x and int y should be greater than 0 and less
-     * than maxX and maxY respectively,as defined in the Game class
+     * than maxX and maxY respectively,as defined in the Game class.
+     * 0 <= x <= maxX
+     * 0 <= y <= maxY
      * EFFECTS: Constructs a PlayerCharacter with its X coordinate
      * equal to x and its Y coordinate equal to y
      */
@@ -24,9 +26,10 @@ public class PlayerCharacter {
     }
 
     /*
-     * REQUIRES:
-     * MODIFIES:
-     * EFFECTS:
+     * REQUIRES: 0 <= x <= maxX
+     * 0 <= y <= maxY
+     * MODIFIES: this, game
+     * EFFECTS: Moves the player left and right on the screen depending on the arrow key pressed
      */
     public void move(KeyType key, Game game) {
 
@@ -60,9 +63,13 @@ public class PlayerCharacter {
     }
 
     /*
-     * REQUIRES:
-     * MODIFIES:
-     * EFFECTS:
+     * REQUIRES: int x should be greater than 0 and less
+     * than maxX, as defined in the Game class.
+     * 0 <= x <= maxX
+     * playerMovementSpeed > 0
+     * MODIFIES: this, game
+     * EFFECTS: Updates the x position of the player on the game screen depending on the direction
+     * passed by move and the playerMovementSpeed
      */
     public int updateX(int x, Game game, int direction) {
         switch (direction) {
@@ -88,9 +95,10 @@ public class PlayerCharacter {
 
 
     /*
-     * REQUIRES:
-     * MODIFIES:
-     * EFFECTS:
+     * REQUIRES: playerJumpHeight > 0
+     * MODIFIES: this, game
+     * EFFECTS: Allows the player to jump and double jump depending on the playerJumpHeight and the
+     * direction of gravity
      */
     public void jump(Game game) {
 
@@ -123,9 +131,9 @@ public class PlayerCharacter {
     }
 
     /*
-     * REQUIRES:
-     * MODIFIES:
-     * EFFECTS:
+     * MODIFIES: this
+     * EFFECTS: Sets maxJumps to 1 once the player touches the floor or ceiling after gravitating,
+     *  resetting the double jump and allowing the player to execute it again.
      */
     public void resetDoubleJump(Game game) {
         if (game.getPlayer().getPos().getY() == 0 || game.getPlayer().getPos().getY() == game.getMaxY()
@@ -135,9 +143,10 @@ public class PlayerCharacter {
     }
 
     /*
-     * REQUIRES:
-     * MODIFIES:
-     * EFFECTS:
+     * REQUIRES: 0 <= pos.getX() <= maxX
+     * 0 <= pos.getY() <= maxY
+     * MODIFIES: this, game
+     * EFFECTS: Pulls the player to the floor or ceiling, depending on the direction of gravity
      */
     public void getPulledByGravity(int gravDirection, int maxY) {
 
@@ -164,9 +173,8 @@ public class PlayerCharacter {
     }
 
     /*
-     * REQUIRES:
-     * MODIFIES:
-     * EFFECTS:
+     * EFFECTS: returns true if the position of the player is equal to the position of the object passed as
+     * an argument
      */
     public boolean hasCollided(Position p) {
         return ((pos.getX() == p.getX()) && (pos.getY() == p.getY()));

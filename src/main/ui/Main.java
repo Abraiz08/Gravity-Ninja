@@ -6,12 +6,10 @@ package ui;
 public class Main {
 
     /*
-     * REQUIRES:
-     * MODIFIES:
-     * EFFECTS:
+     * EFFECTS: Runs the game
      */
     public static void main(String[] args) throws Exception {
-// create and start the game
+        // create and start the game
         TerminalGame gameHandler = new TerminalGame();
 
         gameHandler.start();

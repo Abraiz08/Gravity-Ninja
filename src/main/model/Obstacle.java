@@ -13,9 +13,15 @@ public class Obstacle {
     private String obstacleDirection;
 
     /*
-     * REQUIRES:
-     * MODIFIES:
-     * EFFECTS:
+     * REQUIRES: x and y coordinates should be greater than 0 and less
+     * than maxX and maxY respectively,as defined in the Game class.
+     * 0 <= pos.getX <= maxX
+     * 0 <= pos.getY <= maxY
+     * MODIFIES: this
+     * EFFECTS: Constructs an obstacle with the position pos
+     * Gives obstacleTicker a random value through randomizeObstacleSpeed()
+     * Gives decider a random value through Math.random()
+     * Calls decideObstacleDirection, which gives the obstacle a movement direction
      */
     public Obstacle(Position pos, int maxX, int maxY) {
 
@@ -28,22 +34,24 @@ public class Obstacle {
     }
 
     /*
-     * REQUIRES:
-     * MODIFIES:
-     * EFFECTS:
+     * MODIFIES: this
+     * EFFECTS: randomizes ot (obstacle ticker) using the formula "1 + ((int) (Math.random() * 10))",
+     * but does not allow the ot to exceed 6
      */
     private int randomizeObstacleSpeed() {
-        int speed = 1 + ((int) (Math.random() * 10));
-        while (speed > 6) {
-            speed = 1 + ((int) (Math.random() * 10));
+        int ot = 1 + ((int) (Math.random() * 10));
+        while (ot > 6) {
+            ot = 1 + ((int) (Math.random() * 10));
         }
-        return speed;
+        return ot;
     }
 
     /*
-     * REQUIRES:
-     * MODIFIES:
-     * EFFECTS:
+     * REQUIRES: 0 <= pos.getX <= maxX
+     * 0 <= pos.getY  <= maxY
+     * MODIFIES: this
+     * EFFECTS: Uses decider, along with the position in which the obstacle was constructed to decide
+     * the direction in which the obstacle will move
      */
     @SuppressWarnings("methodlength")
     private void decideObstacleDirection(Position pos, int maxX, int maxY, double decider) {
@@ -84,9 +92,12 @@ public class Obstacle {
     }
 
     /*
-     * REQUIRES:
-     * MODIFIES:
-     * EFFECTS:
+     * REQUIRES: * 0 <= pos.getX <= maxX
+     * 0 <= pos.getY  <= maxY
+     * obstacleSpeed > 0
+     * MODIFIES: this, game
+     * EFFECTS: Moves the obstacle in the direction it is supposed to move, with the magnitude obstacleSpeed,
+     * once every time (tps % obstacleTicker == 0), where tps is TICKS_PER_SECOND
      */
     public void move(int tps) {
         if (tps % obstacleTicker == 0) {

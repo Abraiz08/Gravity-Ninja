@@ -27,15 +27,12 @@ public class TerminalGame {
     private Screen screen;
     private WindowBasedTextGUI endGui;
 
-    /**
-     * Begins the game and method does not leave execution
+    /*
+     * MODIFIES: this, game
+     * EFFECTS: Begins the game and method does not leave execution
      * until game is complete.
      */
-    /*
-     * REQUIRES:
-     * MODIFIES:
-     * EFFECTS:
-     */
+    //found in SnakeConsole-Lanterna Project
     public void start() throws IOException, InterruptedException {
 
         screen = new DefaultTerminalFactory().createScreen();
@@ -52,15 +49,12 @@ public class TerminalGame {
         beginTicks();
     }
 
-    /**
-     * Begins the game cycle. Ticks once every Game.TICKS_PER_SECOND until
+    /*
+     * REQUIRES: TICKS_PER_SECOND > 0
+     * EFFECTS: Begins the game cycle. Ticks once every Game.TICKS_PER_SECOND until
      * game has ended and the endGui has been exited.
      */
-    /*
-     * REQUIRES:
-     * MODIFIES:
-     * EFFECTS:
-     */
+    //found in SnakeConsole-Lanterna Project
     private void beginTicks() throws IOException, InterruptedException {
         while (!game.isEnded() || endGui.getActiveWindow() != null) {
             tick();
@@ -71,13 +65,12 @@ public class TerminalGame {
     }
 
     /**
-     * Handles one cycle in the game by taking user input,
-     * ticking the game internally, and rendering the effects
+     *
      */
     /*
-     * REQUIRES:
-     * MODIFIES:
-     * EFFECTS:
+     * MODIFIES: this
+     * EFFECTS: Handles one cycle in the game by taking user input, calling resetDoubleJump(...) and
+     * handleGravitating(...), ticking the game internally, and rendering the effects
      */
     private void tick() throws IOException {
 
@@ -99,14 +92,17 @@ public class TerminalGame {
 
 
     /**
-     * Sets the snake's direction corresponding to the
-     * user's keystroke
+     *
      */
     /*
-     * REQUIRES:
-     * MODIFIES:
-     * EFFECTS:
+     * MODIFIES: game
+     * EFFECTS: Makes the player character perform a certain action depending on the KeyStroke inputted by
+     * the user
+     * Any input that isn't a character is passed to move()
+     * 'x' flips the gravity of the game arena
+     * ' ' causes the player to either jump, double jump, or do nothing based on a number of conditions
      */
+    //some code found in SnakeConsole-Lanterna Project
     private void handleUserInput() throws IOException {
         KeyStroke stroke = screen.pollInput();
 
@@ -134,7 +130,7 @@ public class TerminalGame {
             game.getPlayer().setMaxJumpsToZero();
             game.getPlayer().jump(game);
 
-
+//jump
         } else if (stroke.getCharacter() == ' '
                    && (game.getPlayer().getPos().getY() == 0
                    || game.getPlayer().getPos().getY() == game.getMaxY())) {
@@ -147,9 +143,9 @@ public class TerminalGame {
     }
 
     /*
-     * REQUIRES:
-     * MODIFIES:
-     * EFFECTS:
+     * MODIFIES: game
+     * EFFECTS: Sets gravitating to false once the user touches the floor or ceiling
+     * of the game arena
      */
     private void handleGravitating(int posY) {
         if (game.getGravity().getGravitating()  && (posY == 0
@@ -159,15 +155,11 @@ public class TerminalGame {
         }
     }
 
-    /**
-     * Renders the current screen.
+    /*
+     * MODIFIES: this
+     * EFFECTS: Renders the current screen.
      * Draws the end screen if the game has ended, otherwise
      * draws the score, player, points and obstacles.
-     */
-    /*
-     * REQUIRES:
-     * MODIFIES:
-     * EFFECTS:
      */
     private void render() {
         if (game.isEnded()) {
@@ -185,10 +177,10 @@ public class TerminalGame {
     }
 
     /*
-     * REQUIRES:
-     * MODIFIES:
-     * EFFECTS:
+     * MODIFIES: this
+     * EFFECTS: draws the end screen
      */
+    //found in SnakeConsole-Lanterna Project
     private void drawEndScreen() {
         endGui = new MultiWindowTextGUI(screen);
 
@@ -201,10 +193,10 @@ public class TerminalGame {
     }
 
     /*
-     * REQUIRES:
-     * MODIFIES:
-     * EFFECTS:
+     * MODIFIES: this
+     * EFFECTS: draws the score
      */
+    //found in SnakeConsole-Lanterna Project
     private void drawScore() {
         TextGraphics text = screen.newTextGraphics();
         text.setForegroundColor(TextColor.ANSI.GREEN);
@@ -216,10 +208,10 @@ public class TerminalGame {
     }
 
     /*
-     * REQUIRES:
-     * MODIFIES:
-     * EFFECTS:
+     * MODIFIES: this
+     * EFFECTS: draws the player
      */
+    //found in SnakeConsole-Lanterna Project
     private void drawPlayer() {
         PlayerCharacter player = game.getPlayer();
         drawPosition(player.getPos(), TextColor.ANSI.GREEN, '█');
@@ -227,10 +219,10 @@ public class TerminalGame {
     }
 
     /*
-     * REQUIRES:
-     * MODIFIES:
-     * EFFECTS:
+     * MODIFIES: this
+     * EFFECTS: draws the points
      */
+    //found in SnakeConsole-Lanterna Project
     private void drawPoints() {
         for (Position points : game.getPoints()) {
             drawPosition(points, TextColor.ANSI.CYAN, '◆');
@@ -238,9 +230,8 @@ public class TerminalGame {
     }
 
     /*
-     * REQUIRES:
-     * MODIFIES:
-     * EFFECTS:
+     * MODIFIES: this
+     * EFFECTS: draws each obstacle in obstacles
      */
     private void drawObstacles() {
         for (Obstacle obstacle : game.getObstacles()) {
@@ -253,16 +244,11 @@ public class TerminalGame {
         }
     }
 
-
-
-    /**
-     * Draws a character in a given position on the terminal.
-     */
     /*
-     * REQUIRES:
-     * MODIFIES:
-     * EFFECTS:
+     * MODIFIES: this
+     * EFFECTS: Draws a character in a given position on the terminal.
      */
+    //found in SnakeConsole-Lanterna Project
     private void drawPosition(Position pos, TextColor color, char c) {
         TextGraphics text = screen.newTextGraphics();
         text.setForegroundColor(color);
