@@ -1,14 +1,12 @@
 package model;
 
-import javafx.geometry.Pos;
-
 /**
  * Class representing the obstacles the player has to dodge
  */
 public class Obstacle {
 
     private Position pos;
-    private int obstacleSpeed = 1;
+    private final int obstacleSpeed = 1;
     private int obstacleTicker;
     private String obstacleDirection;
 
@@ -102,22 +100,22 @@ public class Obstacle {
     public void move(int tps) {
         if (tps % obstacleTicker == 0) {
 
-            if (obstacleDirection == "right") {
+            if (obstacleDirection.equals("right")) {
                 pos = new Position(
                         pos.getX() + obstacleSpeed,
                         pos.getY()
                 );
-            } else if (obstacleDirection == "left") {
+            } else if (obstacleDirection.equals("left")) {
                 pos = new Position(
                         pos.getX() - obstacleSpeed,
                         pos.getY()
                 );
-            } else if (obstacleDirection == "up") {
+            } else if (obstacleDirection.equals("up")) {
                 pos = new Position(
                         pos.getX(),
                         pos.getY() - obstacleSpeed
                 );
-            } else if (obstacleDirection == "down") {
+            } else if (obstacleDirection.equals("down")) {
                 pos = new Position(
                         pos.getX(),
                         pos.getY() + obstacleSpeed
