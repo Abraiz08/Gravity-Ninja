@@ -3,6 +3,8 @@ package model;
 
 
 
+import javafx.geometry.Pos;
+
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -20,7 +22,7 @@ public class Game {
 
     private int ticker;
     private int secondsPassed;
-    private final PlayerCharacter player;
+    private PlayerCharacter player;
     private final Gravity gravity;
 
     private final Set<Position> points = new HashSet<>();
@@ -301,6 +303,10 @@ public class Game {
 
     public int getMaxY() {
         return maxY;
+    }
+
+    public void setPlayerPosition(int x, int y) {
+        player = new PlayerCharacter(x, y);
     }
 }
 

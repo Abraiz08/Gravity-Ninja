@@ -8,6 +8,7 @@ public class Obstacle {
     private Position pos;
     private final int obstacleSpeed = 1;
     private int obstacleTicker;
+    private double decider;
     private String obstacleDirection;
 
     /*
@@ -27,8 +28,16 @@ public class Obstacle {
 
         obstacleTicker = randomizeObstacleSpeed();
 
-        double decider = Math.random();
+        randomizeDecider();
         decideObstacleDirection(pos, maxX, maxY, decider);
+    }
+
+    /*
+     * MODIFIES: this
+     * EFFECTS: randomizes decider using Math.random()
+     */
+    public void randomizeDecider() {
+        decider = Math.random();
     }
 
     /*
@@ -36,7 +45,7 @@ public class Obstacle {
      * EFFECTS: randomizes ot (obstacle ticker) using the formula "1 + ((int) (Math.random() * 10))",
      * but does not allow the ot to exceed 6
      */
-    private int randomizeObstacleSpeed() {
+    public int randomizeObstacleSpeed() {
         int ot = 1 + ((int) (Math.random() * 10));
         while (ot > 6) {
             ot = 1 + ((int) (Math.random() * 10));
@@ -52,7 +61,7 @@ public class Obstacle {
      * the direction in which the obstacle will move
      */
     @SuppressWarnings("methodlength")
-    private void decideObstacleDirection(Position pos, int maxX, int maxY, double decider) {
+    public void decideObstacleDirection(Position pos, int maxX, int maxY, double decider) {
         if ((pos.getY() < 5) && (pos.getX() < 5)) {
             if (decider < 0.5) {
                 obstacleDirection = "right";
@@ -130,5 +139,17 @@ public class Obstacle {
 
     public Position getPos() {
         return pos;
+    }
+
+    public double getDecider() {
+        return decider;
+    }
+
+    public double getObstacleTicker() {
+        return obstacleTicker;
+    }
+
+    public void setObstacleTicker(int ot) {
+        obstacleTicker = ot;
     }
 }

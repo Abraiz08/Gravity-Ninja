@@ -93,7 +93,6 @@ public class PlayerCharacter {
 
     }
 
-
     /*
      * REQUIRES: playerJumpHeight > 0
      * MODIFIES: this, game
@@ -136,7 +135,7 @@ public class PlayerCharacter {
      *  resetting the double jump and allowing the player to execute it again.
      */
     public void resetDoubleJump(Game game) {
-        if (game.getPlayer().getPos().getY() == 0 || game.getPlayer().getPos().getY() == game.getMaxY()
+        if ((game.getPlayer().getPos().getY() == 0 || game.getPlayer().getPos().getY() == game.getMaxY())
                 && game.getGravity().getGravitating() == false) {
             game.getPlayer().setMaxJumpsToOne();
         }
@@ -194,6 +193,10 @@ public class PlayerCharacter {
 
     public int getMaxJumps() {
         return maxJumps;
+    }
+
+    public int getPlayerJumpHeight() {
+        return playerJumpHeight;
     }
 
 }
