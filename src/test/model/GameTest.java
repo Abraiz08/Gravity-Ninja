@@ -77,15 +77,95 @@ public class GameTest {
 
     @Test
     void testObstacleGate() {
+        testGame.setSecondsPassed(7);
+        testGame.obstacleGate();
+        assertFalse(testGame.isCanSpawnObstacle());
         testGame.setSecondsPassed(2);
-        assertTrue(testGame.isCanSpawnObstacle());
-
-
+        testGame.obstacleGate();
         assertTrue(testGame.isCanSpawnObstacle());
     }
 
+    @Test
+    void testDetectObstacleCollision() {
+        testGame.getObstacles().add(new Obstacle((new Position(5, 5)), 20, 20));
 
+        testGame.setPlayerPosition(3, 5);
+        testGame.detectObstacleCollision();
+        assertFalse(testGame.isEnded());
 
+        testGame.setPlayerPosition(5, 5);
+        testGame.detectObstacleCollision();
+        assertTrue(testGame.isEnded());
+
+    }
+
+    @Test
+    void testSpawnPoints() {
+        testGame.spawnPoints();
+        assertEquals(2, testGame.getPoints().size());
+    }
+
+    @Test
+    void testIsOutOfBounds() {
+        Position pos = new Position (0,0);
+        assertFalse(testGame.isOutOfBounds(pos));
+
+        Position pos2 = new Position (-1,0);
+        assertTrue(testGame.isOutOfBounds(pos2));
+
+        Position pos3 = new Position (0,-1);
+        assertTrue(testGame.isOutOfBounds(pos3));
+
+        Position pos4 = new Position (21,0);
+        assertTrue(testGame.isOutOfBounds(pos4));
+
+        Position pos5 = new Position (0,21);
+        assertTrue(testGame.isOutOfBounds(pos5));
+
+    }
+
+    @Test
+    void testIsValidPosition() {
+        Position pos = new Position (-5,0);
+        assertFalse(testGame.isValidPosition(pos));
+
+        Position pos2 = new Position (5,0);
+        testGame.getPoints().add(pos2);
+        assertFalse(testGame.isValidPosition(pos2));
+
+        Position pos3 = new Position (6,0);
+        testGame.setPlayerPosition(6,0);
+        assertFalse(testGame.isValidPosition(pos3));
+
+        Position pos4 = new Position (6,2);
+        assertTrue(testGame.isValidPosition(pos4));
+
+    }
+
+    @Test
+    void testIsValidPositionForObstacle() {
+        Position pos = new Position (-5,0);
+        assertFalse(testGame.isValidPositionForObstacle(pos));
+
+        Position pos2 = new Position (6,8);
+        assertFalse(testGame.isValidPositionForObstacle(pos2));
+
+        Position pos3 = new Position (2,8);
+        assertTrue(testGame.isValidPositionForObstacle(pos3));
+    }
+
+    @Test
+    void testHandlePoints() {
+
+    }
+
+    @Test
+    void testSpawnObstacles() {
+        Game testGame2 = new Game(20, 20);
+        testGame2.spawnObstacles();
+        assertTrue(testGame2.getDecider() > 1);
+        assertEquals(0, testGame2.getObstacles().size());
+    }
 
 }
 

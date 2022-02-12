@@ -78,7 +78,7 @@ public class PlayerCharacterTest {
         testGame.getGravity().isGravitating();
         testGame.getPlayer().resetDoubleJump(testGame);
 
-        assertEquals(0, testGame.getPlayer().getMaxJumps());
+        assertEquals(1, testGame.getPlayer().getMaxJumps());
 
         testGame.getPlayer().setMaxJumpsToZero();
         testGame.setPlayerPosition(0,0);
@@ -99,14 +99,14 @@ public class PlayerCharacterTest {
         testGame.getGravity().noLongerGravitating();
         testGame.getPlayer().resetDoubleJump(testGame);
 
-        assertEquals(0, testGame.getPlayer().getMaxJumps());
+        assertEquals(1, testGame.getPlayer().getMaxJumps());
 
         testGame.getPlayer().setMaxJumpsToZero();
         testGame.setPlayerPosition(0,5);
         testGame.getGravity().isGravitating();
         testGame.getPlayer().resetDoubleJump(testGame);
 
-        assertEquals(0, testGame.getPlayer().getMaxJumps());
+        assertEquals(1, testGame.getPlayer().getMaxJumps());
     }
 
     @Test

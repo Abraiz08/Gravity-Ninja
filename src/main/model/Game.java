@@ -36,6 +36,8 @@ public class Game {
     private final int maxX;
     private final int maxY;
 
+    private double decider;
+
     /*
      * MODIFIES: this
      * EFFECTS: maxX and maxY are set to the biggest values of x and y on the terminal
@@ -150,7 +152,7 @@ public class Game {
      * EFFECTS: Checks if the player has collided with (has the same position as) any obstacle
      * in the list obstacles. If true, the game is ended.
      */
-    private void detectObstacleCollision() {
+    public void detectObstacleCollision() {
         for (Obstacle obstacle : obstacles) {
             if (player.hasCollided(obstacle.getPos())) {
                 ended = true;
@@ -237,8 +239,8 @@ public class Game {
      * EFFECTS: Spawns a random number of obstacles based on the formula
      * 1 + ((Math.random() * 10) / 1.5)
      */
-    private void spawnObstacles() {
-        double decider = 1 + ((Math.random() * 10) / 1.5);
+    public void spawnObstacles() {
+        decider = 1 + ((Math.random() * 10) / 1.5);
         for (int i = 0; i < decider; i++) {
             spawnObstacle();
         }
@@ -249,7 +251,7 @@ public class Game {
      * EFFECTS: Spawns an obstacle in a valid position on the game screen, if ticker == TICKS_PER_SECOND and
      * canSpawnObstacles is true
      */
-    private void spawnObstacle() {
+    public void spawnObstacle() {
         Position pos = generateRandomPosition();
 
         while (! isValidPositionForObstacle(pos)) {
@@ -305,6 +307,10 @@ public class Game {
 
     public int getMaxY() {
         return maxY;
+    }
+
+    public double getDecider() {
+        return decider;
     }
 
     public int getTicker() {

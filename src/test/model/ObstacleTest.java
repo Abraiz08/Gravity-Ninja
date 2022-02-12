@@ -105,17 +105,19 @@ public class ObstacleTest {
 
         assertEquals(2, testObstacle.getPos().getX());
 //left
-        testPos = new Position(16, 8);
-        testObstacle.decideObstacleDirection(testPos, 20, 20, testObstacle.getDecider());
-        testObstacle.move(60);
+        Position testPos2 = new Position(16, 8);
+        Obstacle testObstacle2 = new Obstacle (testPos2, 20, 20);
+        testObstacle2.decideObstacleDirection(testPos2, 20, 20, testObstacle2.getDecider());
+        testObstacle2.move(60);
 
-        assertEquals(15, testObstacle.getPos().getX());
+        assertEquals(15, testObstacle2.getPos().getX());
 //up
-        testPos = new Position(8, 16);
-        testObstacle.decideObstacleDirection(testPos, 20, 20, testObstacle.getDecider());
-        testObstacle.move(60);
+        Position testPos3 = new Position(8, 16);
+        Obstacle testObstacle3 = new Obstacle (testPos3, 20, 20);
+        testObstacle3.decideObstacleDirection(testPos3, 20, 20, testObstacle3.getDecider());
+        testObstacle3.move(60);
 
-        assertEquals(15, testObstacle.getPos().getY());
+        assertEquals(15, testObstacle3.getPos().getY());
 //down
         testPos = new Position(8, 1);
         testObstacle.decideObstacleDirection(testPos, 20, 20, testObstacle.getDecider());
