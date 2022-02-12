@@ -59,6 +59,7 @@ public class Game {
         secondsPassed = 0;
     }
 
+
     /*
      * MODIFIES: this
      * EFFECTS: Performs a number of actions for each tick in the game and progresses the game state
@@ -97,7 +98,7 @@ public class Game {
      * MODIFIES: this
      * EFFECTS: Moves every obstacle in the list obstacles once every 5 ticks
      */
-    private void moveAllObstacles() {
+    public void moveAllObstacles() {
         if (ticker % 5 == 0) {
             for (Obstacle obstacle : obstacles) {
                 obstacle.move(TICKS_PER_SECOND);
@@ -109,7 +110,7 @@ public class Game {
      * MODIFIES: this
      * EFFECTS: Applies the effect of gravity on the player once every 3 ticks
      */
-    private void applyGravity() {
+    public void applyGravity() {
         if ((ticker % 3) == 0) {
             player.getPulledByGravity(gravity.getGravDirection(), maxY);
 
@@ -121,13 +122,14 @@ public class Game {
      * EFFECTS: Counts the number of seconds passed since the game started
      * Resets the ticker to 0 every second
      */
-    private void countSeconds() {
+    public void countSeconds() {
         if (ticker > TICKS_PER_SECOND) {
             secondsPassed++;
             ticker = 0;
             obstacleGate();
         }
     }
+
 
     /*
      * MODIFIES: this
@@ -305,8 +307,28 @@ public class Game {
         return maxY;
     }
 
+    public int getTicker() {
+        return ticker;
+    }
+
+    public int getSecondsPassed() {
+        return secondsPassed;
+    }
+
+    public boolean isCanSpawnObstacle() {
+        return canSpawnObstacle;
+    }
+
+    public void setTicker(int ticker) {
+        this.ticker = ticker;
+    }
+
     public void setPlayerPosition(int x, int y) {
         player = new PlayerCharacter(x, y);
+    }
+
+    public void setSecondsPassed(int secondsPassed) {
+        this.secondsPassed = secondsPassed;
     }
 }
 

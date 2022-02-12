@@ -72,23 +72,21 @@ public class PlayerCharacter {
      * passed by move and the playerMovementSpeed
      */
     public int updateX(int x, Game game, int direction) {
-        switch (direction) {
-            case 1:
-                if ((x + (direction * playerMovementSpeed)) < game.getMaxX()) {
-                    return x + (direction * playerMovementSpeed);
+        if (direction == 1) {
+            if ((x + (direction * playerMovementSpeed)) < game.getMaxX()) {
+                return x + (direction * playerMovementSpeed);
 
-                } else {
-                    return x;
-                }
-
-            case -1:
-                if ((x + (direction * playerMovementSpeed)) > 0) {
-                    return x + (direction * playerMovementSpeed);
-                } else {
-                    return 0;
-                }
-            default:
+            } else {
                 return x;
+            }
+
+        } else {
+            if ((x + (direction * playerMovementSpeed)) > 0) {
+                return x + (direction * playerMovementSpeed);
+            } else {
+                return 0;
+            }
+
         }
 
     }
