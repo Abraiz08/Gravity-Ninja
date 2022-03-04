@@ -32,10 +32,6 @@ public class Position {
         return y1;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(x1,y1);
-    }
 
     //MODIFIES: json
     //EFFECTS: returns pos as a json object

@@ -318,7 +318,7 @@ public class Game implements Writable {
 
     // MODIFIES: this
     // EFFECTS: returns obstacles as a JSON array
-    private JSONArray obstaclesToJson() {
+    public JSONArray obstaclesToJson() {
         JSONArray jsonArray = new JSONArray();
 
         for (Obstacle obstacle : obstacles) {

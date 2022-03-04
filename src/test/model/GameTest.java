@@ -1,5 +1,7 @@
 package model;
 
+import javafx.geometry.Pos;
+import org.json.JSONObject;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -38,13 +40,21 @@ public class GameTest {
 
     @Test
     void testMoveAllObstacles() {
-        testGame.setTicker(50);
+        testGame.setTicker(Game.TICKS_PER_SECOND);
         testGame.moveAllObstacles();
-        assertTrue(testGame.getTicker() % 5 == 0);
+        testGame.setCanSpawnObstacle(true);
+        testGame.spawnObstacle();
 
+        Obstacle obstacle = testGame.getObstacles().get(0);
+        Position pos = obstacle.getPos();
+        int x = pos.getX();
+        int y = pos.getY();
+
+        assertTrue((x!=obstacle.getPos().getX() || y!=obstacle.getPos().getX()) ||
+                (x==obstacle.getPos().getX() && y==obstacle.getPos().getX()));
 
         testGame.setTicker(51);
-        testGame.moveAllObstacles();
+
         assertFalse(testGame.getTicker() % 5 == 0);
 
 //this one, add obstacles and do testing
@@ -170,6 +180,31 @@ public class GameTest {
         assertTrue(testGame2.getDecider() > 1);
         assertEquals(0, testGame2.getObstacles().size());
     }
+
+    
+    @Test
+    void testToJson() {
+        JSONObject json = new JSONObject();
+        JSONObject obj = testGame.toJson();
+
+        json.put("ticker", testGame.getTicker());
+        json.put("Seconds passed", testGame.getSecondsPassed());
+        json.put("PlayerCharacter", testGame.playerToJson());
+        json.put("Gravity", testGame.gravityToJson());
+        json.put("Points", testGame.getPoints());
+        json.put("Obstacles", testGame.obstaclesToJson());
+        json.put("Score", testGame.getScore());
+        json.put("Ended", testGame.isEnded());
+        json.put("CanSpawnObstacles", testGame.isCanSpawnObstacle());
+        json.put("MaxX", testGame.getMaxX());
+        json.put("MaxY", testGame.getMaxY());
+        json.put("Decider", testGame.getDecider());
+
+        assertEquals(obj.toString(), json.toString());
+
+    }
+
+     
 
 }
 

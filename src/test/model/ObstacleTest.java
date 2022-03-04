@@ -1,5 +1,7 @@
 package model;
 
+import javafx.geometry.Pos;
+import org.json.JSONObject;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -27,6 +29,7 @@ public class ObstacleTest {
 
     @Test
     void testRandomizeDecider(){
+        testObstacle.randomizeDecider();
         assertTrue(0 <= testObstacle.getDecider()
                 && testObstacle.getDecider() < 1);
     }
@@ -123,8 +126,6 @@ public class ObstacleTest {
         testObstacle.move(60);
 
         assertEquals(2, testObstacle.getPos().getY());
-
-
 
     }
 
