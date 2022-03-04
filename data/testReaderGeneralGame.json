@@ -1,0 +1,44 @@
+{
+  "MaxX": 20,
+  "Obstacles": [
+    {
+      "Position": {
+        "X-pos": 1,
+        "Y-pos": 1
+      },
+      "Obstacle Ticker": 3,
+      "Obstacle Speed": 1,
+      "Obstacle Direction": "down",
+      "Decider": 0.7590221269082184
+    },
+    {
+      "Position": {
+        "X-pos": 2,
+        "Y-pos": 10
+      },
+      "Obstacle Ticker": 2,
+      "Obstacle Speed": 1,
+      "Obstacle Direction": "right",
+      "Decider": 0.3027530103042043
+    }
+  ],
+  "MaxY": 20,
+  "ticker": 0,
+  "Points": [{
+    "x": 0,
+    "y": 8
+  }],
+  "Score": 0,
+  "PlayerCharacter": {
+    "X-pos": 0,
+    "Y-pos": 20
+  },
+  "Ended": false,
+  "CanSpawnObstacles": true,
+  "Seconds passed": 0,
+  "Gravity": {
+    "Grav Direction": -1,
+    "Gravitating": false
+  },
+  "Decider": 0
+}

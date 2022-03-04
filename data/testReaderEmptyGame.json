@@ -1,0 +1,23 @@
+{
+  "MaxX": 20,
+  "Obstacles": [],
+  "MaxY": 20,
+  "ticker": 0,
+  "Points": [{
+    "x": 19,
+    "y": 1
+  }],
+  "Score": 0,
+  "PlayerCharacter": {
+    "X-pos": 0,
+    "Y-pos": 20
+  },
+  "Ended": false,
+  "CanSpawnObstacles": true,
+  "Seconds passed": 0,
+  "Gravity": {
+    "Grav Direction": -1,
+    "Gravitating": false
+  },
+  "Decider": 0
+}
