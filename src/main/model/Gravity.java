@@ -1,5 +1,7 @@
 package model;
 
+import org.json.JSONObject;
+
 /**
  * Class representing the gravity of the playing arena
  */
@@ -36,6 +38,14 @@ public class Gravity {
 
     }
 
+
+    public JSONObject toJson(JSONObject json) {
+        json.put("Grav Direction", gravDirection);
+        json.put("Gravitating", gravitating);
+        return json;
+    }
+
+
     public void isGravitating() {
         gravitating = true;
     }
@@ -50,5 +60,13 @@ public class Gravity {
 
     public int getGravDirection() {
         return gravDirection;
+    }
+
+    public void setGravDirection(int gravDirection) {
+        this.gravDirection = gravDirection;
+    }
+
+    public void setGravitating(boolean gravitating) {
+        this.gravitating = gravitating;
     }
 }

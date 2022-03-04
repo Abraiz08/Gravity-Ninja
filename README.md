@@ -28,4 +28,6 @@ around the arena.
 - As a user, I want to be able to move left and right across the arena floor, or the ceiling depending on the direction 
 of gravity, using the arrow keys.
 - As a user, I want to be able to collect points that appear in the arena and increase my score.
-
+- As a user, I want to be able to save the state of my game, including the positions of all objects, the player 
+character, and the score to file using the 's' key.
+- As a user, when I start the game, I want to be given the option to load my game state from file using the 'l' key.

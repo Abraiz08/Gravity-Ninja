@@ -4,6 +4,8 @@ package model;
 
 
 import javafx.geometry.Pos;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -11,12 +13,14 @@ import java.util.List;
 import java.util.Set;
 import java.util.concurrent.ThreadLocalRandom;
 
+import persistence.Writable;
+
 /**
  * Represents the Game as a whole
  */
 
 //some variable names are taken from the SnakeGame example provided to us
-public class Game {
+public class Game implements Writable {
 
     public static final int TICKS_PER_SECOND = 60;
 
@@ -277,6 +281,52 @@ public class Game {
         );
     }
 
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("ticker", ticker);
+        json.put("Seconds passed", secondsPassed);
+        json.put("PlayerCharacter", playerToJson());
+        json.put("Gravity", gravityToJson());
+        json.put("Points", points);
+        json.put("Obstacles", obstaclesToJson());
+        json.put("Score", score);
+        json.put("Ended", ended);
+        json.put("CanSpawnObstacles", canSpawnObstacle);
+        json.put("MaxX", maxX);
+        json.put("MaxY", maxY);
+        json.put("Decider", decider);
+        return json;
+    }
+
+
+    public JSONObject playerToJson() {
+        JSONObject json = new JSONObject();
+        json = player.toJson(json);
+        return json;
+    }
+
+    public JSONObject gravityToJson() {
+        JSONObject json = new JSONObject();
+        json = gravity.toJson(json);
+        return json;
+    }
+
+    // EFFECTS: returns obstacles as a JSON array
+    private JSONArray obstaclesToJson() {
+        JSONArray jsonArray = new JSONArray();
+
+        for (Obstacle obstacle : obstacles) {
+            jsonArray.put(obstacle.toJson());
+        }
+
+        return jsonArray;
+    }
+
+
+
+
+
     public PlayerCharacter getPlayer() {
         return player;
     }
@@ -333,8 +383,28 @@ public class Game {
         player = new PlayerCharacter(x, y);
     }
 
+    public void setScore(int score) {
+        this.score = score;
+    }
+
     public void setSecondsPassed(int secondsPassed) {
         this.secondsPassed = secondsPassed;
+    }
+
+    public void setEnded(boolean ended) {
+        this.ended = ended;
+    }
+
+    public void setCanSpawnObstacle(boolean canSpawnObstacle) {
+        this.canSpawnObstacle = canSpawnObstacle;
+    }
+
+    public void setDecider(double decider) {
+        this.decider = decider;
+    }
+
+    public void setObstacles(List<Obstacle> obstacles) {
+        this.obstacles = obstacles;
     }
 }
 

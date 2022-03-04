@@ -1,5 +1,8 @@
 package model;
 
+import org.json.JSONObject;
+import persistence.Writable;
+
 import java.util.Objects;
 
 /**
@@ -32,6 +35,12 @@ public class Position {
     @Override
     public int hashCode() {
         return Objects.hash(x1,y1);
+    }
+
+    public JSONObject toJson(JSONObject json) {
+        json.put("X-pos", x1);
+        json.put("Y-pos", y1);
+        return json;
     }
 
 

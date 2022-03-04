@@ -39,11 +39,15 @@ public class GameTest {
     @Test
     void testMoveAllObstacles() {
         testGame.setTicker(50);
+        testGame.moveAllObstacles();
         assertTrue(testGame.getTicker() % 5 == 0);
 
+
         testGame.setTicker(51);
+        testGame.moveAllObstacles();
         assertFalse(testGame.getTicker() % 5 == 0);
 
+//this one, add obstacles and do testing
     }
 
     @Test

@@ -1,9 +1,12 @@
 package model;
 
+import org.json.JSONObject;
+import persistence.Writable;
+
 /**
  * Class representing the obstacles the player has to dodge
  */
-public class Obstacle {
+public class Obstacle implements Writable {
 
     private Position pos;
     private final int obstacleSpeed = 1;
@@ -137,6 +140,25 @@ public class Obstacle {
         return obstacleDirection;
     }
 
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("Position", positionToJson());
+        json.put("Obstacle Speed", obstacleSpeed);
+        json.put("Obstacle Ticker", obstacleTicker);
+        json.put("Decider", decider);
+        json.put("Obstacle Direction", obstacleDirection);
+
+        return json;
+    }
+
+    public JSONObject positionToJson() {
+        JSONObject json = new JSONObject();
+        json = pos.toJson(json);
+        return json;
+    }
+
+
     public Position getPos() {
         return pos;
     }
@@ -151,5 +173,17 @@ public class Obstacle {
 
     public void setObstacleTicker(int ot) {
         obstacleTicker = ot;
+    }
+
+    public void setPos(Position pos) {
+        this.pos = pos;
+    }
+
+    public void setDecider(double decider) {
+        this.decider = decider;
+    }
+
+    public void setObstacleDirection(String obstacleDirection) {
+        this.obstacleDirection = obstacleDirection;
     }
 }

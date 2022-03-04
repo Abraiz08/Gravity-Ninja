@@ -15,7 +15,10 @@ import model.Game;
 import model.Obstacle;
 import model.PlayerCharacter;
 import model.Position;
+import persistence.JsonReader;
+import persistence.JsonWriter;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 
 /**
@@ -26,6 +29,11 @@ public class TerminalGame {
 
     private Screen screen;
     private WindowBasedTextGUI endGui;
+
+    private static final String JSON_STORE = "./data/gameFiles.json";
+    private JsonWriter jsonWriter = new JsonWriter(JSON_STORE);
+    private JsonReader jsonReader = new JsonReader(JSON_STORE);
+
 
     /*
      * MODIFIES: this, game
@@ -137,16 +145,48 @@ public class TerminalGame {
             game.getPlayer().jump(game);
 
 
+        } else if (stroke.getCharacter() == 's') {
+            saveGame();
+
+        } else if (stroke.getCharacter() == 'l') {
+            loadGame();
         }
 
 
     }
+
+    // EFFECTS: saves the game to file
+    private void saveGame() {
+        try {
+            jsonWriter.open();
+            jsonWriter.write(game);
+            jsonWriter.close();
+            System.out.println("Saved to " + JSON_STORE);
+        } catch (FileNotFoundException e) {
+            System.out.println("Unable to write to file: " + JSON_STORE);
+        }
+
+    }
+
+    // MODIFIES: this
+    // EFFECTS: loads game from file
+    private void loadGame() {
+        try {
+            game = jsonReader.read();
+            System.out.println("Loaded game from " + JSON_STORE);
+        } catch (IOException e) {
+            System.out.println("Unable to read from file: " + JSON_STORE);
+        }
+    }
+
+
 
     /*
      * MODIFIES: game
      * EFFECTS: Sets gravitating to false once the user touches the floor or ceiling
      * of the game arena
      */
+    //TODO move
     private void handleGravitating(int posY) {
         if (game.getGravity().getGravitating()  && (posY == 0
                 || posY == game.getMaxY())) {

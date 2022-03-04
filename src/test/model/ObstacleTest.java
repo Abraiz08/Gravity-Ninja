@@ -101,7 +101,6 @@ public class ObstacleTest {
         testPos = new Position(1, 8);
         testObstacle.decideObstacleDirection(testPos, 20, 20, testObstacle.getDecider());
         testObstacle.move(60);
-        System.out.println(testObstacle.getObstacleDirection());
 
         assertEquals(2, testObstacle.getPos().getX());
 //left

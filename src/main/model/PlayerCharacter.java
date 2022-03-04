@@ -1,6 +1,7 @@
 package model;
 
 import com.googlecode.lanterna.input.KeyType;
+import org.json.JSONObject;
 
 /**
  * Class representing the player character
@@ -175,6 +176,12 @@ public class PlayerCharacter {
      */
     public boolean hasCollided(Position p) {
         return ((pos.getX() == p.getX()) && (pos.getY() == p.getY()));
+    }
+
+    public JSONObject toJson(JSONObject json) {
+        json.put("X-pos", getPos().getX());
+        json.put("Y-pos", getPos().getY());
+        return json;
     }
 
     public void setMaxJumpsToZero() {
