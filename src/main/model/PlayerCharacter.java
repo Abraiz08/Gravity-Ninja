@@ -178,6 +178,8 @@ public class PlayerCharacter {
         return ((pos.getX() == p.getX()) && (pos.getY() == p.getY()));
     }
 
+    // MODIFIES: json
+    // EFFECTS: adds x and y position of player to json object
     public JSONObject toJson(JSONObject json) {
         json.put("X-pos", getPos().getX());
         json.put("Y-pos", getPos().getY());

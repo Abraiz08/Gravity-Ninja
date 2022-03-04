@@ -72,9 +72,6 @@ public class TerminalGame {
         System.exit(0);
     }
 
-    /**
-     *
-     */
     /*
      * MODIFIES: this
      * EFFECTS: Handles one cycle in the game by taking user input, calling resetDoubleJump(...) and
@@ -98,10 +95,6 @@ public class TerminalGame {
         screen.setCursorPosition(new TerminalPosition(screen.getTerminalSize().getColumns() - 1, 0));
     }
 
-
-    /**
-     *
-     */
     /*
      * MODIFIES: game
      * EFFECTS: Makes the player character perform a certain action depending on the KeyStroke inputted by
@@ -109,6 +102,8 @@ public class TerminalGame {
      * Any input that isn't a character is passed to move()
      * 'x' flips the gravity of the game arena
      * ' ' causes the player to either jump, double jump, or do nothing based on a number of conditions
+     * 's' saves the state of the game
+     * 'l' loads the last save state from file
      */
     //some code found in SnakeConsole-Lanterna Project
     private void handleUserInput() throws IOException {
@@ -155,6 +150,7 @@ public class TerminalGame {
 
     }
 
+    // Method taken from JsonSerializationDemo
     // EFFECTS: saves the game to file
     private void saveGame() {
         try {
@@ -168,7 +164,8 @@ public class TerminalGame {
 
     }
 
-    // MODIFIES: this
+    // Method taken from JsonSerializationDemo
+    // MODIFIES: this, game
     // EFFECTS: loads game from file
     private void loadGame() {
         try {
@@ -179,14 +176,12 @@ public class TerminalGame {
         }
     }
 
-
-
     /*
      * MODIFIES: game
      * EFFECTS: Sets gravitating to false once the user touches the floor or ceiling
      * of the game arena
      */
-    //TODO move
+    //move
     private void handleGravitating(int posY) {
         if (game.getGravity().getGravitating()  && (posY == 0
                 || posY == game.getMaxY())) {

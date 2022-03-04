@@ -3,14 +3,13 @@ package model;
 
 
 
-import javafx.geometry.Pos;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.HashSet;
+
 import java.util.List;
-import java.util.Set;
+
 import java.util.concurrent.ThreadLocalRandom;
 
 import persistence.Writable;
@@ -29,7 +28,7 @@ public class Game implements Writable {
     private PlayerCharacter player;
     private final Gravity gravity;
 
-    private final Set<Position> points = new HashSet<>();
+    private List<Position> points = new ArrayList<>();
     private List<Obstacle> obstacles = new ArrayList<>();
 
     private int score = 0;
@@ -281,6 +280,8 @@ public class Game implements Writable {
         );
     }
 
+    // MODIFIES: this
+    // EFFECTS: saves the game state as a JSON file
     @Override
     public JSONObject toJson() {
         JSONObject json = new JSONObject();
@@ -299,19 +300,23 @@ public class Game implements Writable {
         return json;
     }
 
-
+    // MODIFIES: this
+    // EFFECTS: returns player as a JSON object
     public JSONObject playerToJson() {
         JSONObject json = new JSONObject();
         json = player.toJson(json);
         return json;
     }
 
+    // MODIFIES: this
+    // EFFECTS: returns gravity as a JSON object
     public JSONObject gravityToJson() {
         JSONObject json = new JSONObject();
         json = gravity.toJson(json);
         return json;
     }
 
+    // MODIFIES: this
     // EFFECTS: returns obstacles as a JSON array
     private JSONArray obstaclesToJson() {
         JSONArray jsonArray = new JSONArray();
@@ -323,15 +328,11 @@ public class Game implements Writable {
         return jsonArray;
     }
 
-
-
-
-
     public PlayerCharacter getPlayer() {
         return player;
     }
 
-    public Set<Position> getPoints() {
+    public List<Position> getPoints() {
         return points;
     }
 
@@ -399,13 +400,14 @@ public class Game implements Writable {
         this.canSpawnObstacle = canSpawnObstacle;
     }
 
-    public void setDecider(double decider) {
-        this.decider = decider;
-    }
-
     public void setObstacles(List<Obstacle> obstacles) {
         this.obstacles = obstacles;
     }
+
+    public void setPoints(List<Position> points) {
+        this.points = points;
+    }
+
 }
 
 

@@ -140,6 +140,7 @@ public class Obstacle implements Writable {
         return obstacleDirection;
     }
 
+    // EFFECTS: returns obstacle as a json object
     @Override
     public JSONObject toJson() {
         JSONObject json = new JSONObject();
@@ -152,6 +153,7 @@ public class Obstacle implements Writable {
         return json;
     }
 
+    // EFFECTS: returns obstacle position as a json object
     public JSONObject positionToJson() {
         JSONObject json = new JSONObject();
         json = pos.toJson(json);
@@ -173,10 +175,6 @@ public class Obstacle implements Writable {
 
     public void setObstacleTicker(int ot) {
         obstacleTicker = ot;
-    }
-
-    public void setPos(Position pos) {
-        this.pos = pos;
     }
 
     public void setDecider(double decider) {
