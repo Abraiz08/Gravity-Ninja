@@ -37,6 +37,10 @@ public class PlayerCharacterTest {
         testPlayer.move(KeyType.ArrowRight, testGame);
         assertEquals(20, testPlayer.getPos().getX());
 
+        testGame.setPlayerPosition(3, 20);
+        testPlayer.move(null, testGame);
+        assertEquals(3, testPlayer.getPos().getX());
+        assertEquals(20, testPlayer.getPos().getY());
     }
 
     @Test

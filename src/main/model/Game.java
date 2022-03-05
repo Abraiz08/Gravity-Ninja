@@ -222,7 +222,7 @@ public class Game implements Writable {
      * increases score if point is collected
      */
     //found in SnakeConsole-Lanterna Project
-    private void handlePoints() {
+    public void handlePoints() {
         Position collectedPoints = points.stream()
                 .filter(player::hasCollided)
                 .findFirst()

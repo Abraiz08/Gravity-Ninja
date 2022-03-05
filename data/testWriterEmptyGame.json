@@ -4,8 +4,8 @@
     "MaxY": 20,
     "ticker": 0,
     "Points": [{
-        "x": 8,
-        "y": 7
+        "x": 9,
+        "y": 12
     }],
     "Score": 0,
     "PlayerCharacter": {

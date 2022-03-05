@@ -34,7 +34,9 @@ public class GameTest {
 
     @Test
     void testTick() {
+        testGame.getPoints().clear();
         testGame.tick();
+
         assertEquals(1, testGame.getTicker());
     }
 
@@ -49,6 +51,12 @@ public class GameTest {
         Position pos = obstacle.getPos();
         int x = pos.getX();
         int y = pos.getY();
+
+        assertTrue((x!=obstacle.getPos().getX() || y!=obstacle.getPos().getX()) ||
+                (x==obstacle.getPos().getX() && y==obstacle.getPos().getX()));
+
+        testGame.setTicker(50);
+        testGame.moveAllObstacles();
 
         assertTrue((x!=obstacle.getPos().getX() || y!=obstacle.getPos().getX()) ||
                 (x==obstacle.getPos().getX() && y==obstacle.getPos().getX()));
@@ -116,6 +124,7 @@ public class GameTest {
     @Test
     void testSpawnPoints() {
         testGame.spawnPoints();
+
         assertEquals(2, testGame.getPoints().size());
     }
 
@@ -170,6 +179,19 @@ public class GameTest {
 
     @Test
     void testHandlePoints() {
+        testGame.setScore(0);
+        testGame.getPoints().clear();
+
+        Position pos = new Position(1, 1);
+        testGame.getPoints().add(pos);
+
+        testGame.setPlayerPosition(7, 7);
+        testGame.handlePoints();
+        assertEquals(0, testGame.getScore());
+
+        testGame.setPlayerPosition(1, 1);
+        testGame.handlePoints();
+        assertEquals(1, testGame.getScore());
 
     }
 

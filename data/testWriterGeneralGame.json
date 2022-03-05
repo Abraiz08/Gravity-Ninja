@@ -9,7 +9,7 @@
             "Obstacle Ticker": 1,
             "Obstacle Speed": 1,
             "Obstacle Direction": "down",
-            "Decider": 0.5260488917605536
+            "Decider": 0.920503504163559
         },
         {
             "Position": {
@@ -19,14 +19,14 @@
             "Obstacle Ticker": 5,
             "Obstacle Speed": 1,
             "Obstacle Direction": "right",
-            "Decider": 0.09359825367193153
+            "Decider": 0.8565778126164301
         }
     ],
     "MaxY": 20,
     "ticker": 0,
     "Points": [{
-        "x": 12,
-        "y": 4
+        "x": 0,
+        "y": 13
     }],
     "Score": 0,
     "PlayerCharacter": {
