@@ -1,8 +1,9 @@
 package model;
 
-import com.googlecode.lanterna.input.KeyType;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import java.awt.event.KeyEvent;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -23,24 +24,20 @@ public class PlayerCharacterTest {
 
     @Test
     void testMove() {
-        testPlayer.move(KeyType.ArrowLeft, testGame);
+        testPlayer.move(KeyEvent.VK_LEFT, testGame);
         assertEquals(0, testPlayer.getPos().getX());
 
-        testPlayer.move(KeyType.ArrowRight, testGame);
+        testPlayer.move(KeyEvent.VK_RIGHT, testGame);
         assertEquals(1, testPlayer.getPos().getX());
 
         testGame.setPlayerPosition(3, 20);
-        testPlayer.move(KeyType.ArrowLeft, testGame);
+        testPlayer.move(KeyEvent.VK_LEFT, testGame);
         assertEquals(2, testPlayer.getPos().getX());
 
         testGame.setPlayerPosition(20, 20);
-        testPlayer.move(KeyType.ArrowRight, testGame);
+        testPlayer.move(KeyEvent.VK_RIGHT, testGame);
         assertEquals(20, testPlayer.getPos().getX());
 
-        testGame.setPlayerPosition(3, 20);
-        testPlayer.move(null, testGame);
-        assertEquals(3, testPlayer.getPos().getX());
-        assertEquals(20, testPlayer.getPos().getY());
     }
 
     @Test

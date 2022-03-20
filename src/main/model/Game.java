@@ -97,6 +97,10 @@ public class Game implements Writable {
 
         spawnObstacles();
 
+        handleGravitating(getPlayer().getPos().getY());
+
+        getPlayer().resetDoubleJump(this);
+
     }
 
     /*
@@ -278,6 +282,20 @@ public class Game implements Writable {
                 ThreadLocalRandom.current().nextInt(maxX),
                 ThreadLocalRandom.current().nextInt(maxY)
         );
+    }
+
+    /*
+     * MODIFIES: game
+     * EFFECTS: Sets gravitating to false once the user touches the floor or ceiling
+     * of the game arena
+     */
+    //move
+    private void handleGravitating(int posY) {
+        if (getGravity().getGravitating()  && (posY == 0
+                || posY == getMaxY())) {
+
+            getGravity().noLongerGravitating();
+        }
     }
 
     // MODIFIES: this

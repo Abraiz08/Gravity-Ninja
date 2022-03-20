@@ -1,6 +1,6 @@
 package persistence;
 
-import com.googlecode.lanterna.TerminalSize;
+
 import javafx.geometry.Pos;
 import model.*;
 import java.io.IOException;

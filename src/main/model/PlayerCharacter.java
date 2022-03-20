@@ -1,13 +1,16 @@
 package model;
 
-import com.googlecode.lanterna.input.KeyType;
 import org.json.JSONObject;
+
+import java.awt.event.KeyEvent;
 
 /**
  * Class representing the player character
  */
 public class PlayerCharacter {
 
+    public static final int SIZE_X = 10;
+    public static final int SIZE_Y = 18;
     private final int playerJumpHeight = 6;
     private final int playerMovementSpeed = 1;
     private int maxJumps = 1;
@@ -32,13 +35,13 @@ public class PlayerCharacter {
      * MODIFIES: this, game
      * EFFECTS: Moves the player left and right on the screen depending on the arrow key pressed
      */
-    public void move(KeyType key, Game game) {
+    public void move(int e, Game game) {
 
         int x = game.getPlayer().getPos().getX();
         int y = game.getPlayer().getPos().getY();
 
 //for x
-        if (key == KeyType.ArrowLeft) {
+        if (e == KeyEvent.VK_LEFT) {
             if (x > 0) {
                 pos = new Position(
                         updateX(x, game, -1),
@@ -48,7 +51,7 @@ public class PlayerCharacter {
                 pos = game.getPlayer().getPos();
             }
 //for y
-        } else if (key == KeyType.ArrowRight) {
+        } else if (e == KeyEvent.VK_RIGHT) {
             if (x < game.getMaxX()) {
                 pos = new Position(
                         updateX(x, game, 1),

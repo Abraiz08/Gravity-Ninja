@@ -8,6 +8,9 @@ import persistence.Writable;
  */
 public class Obstacle implements Writable {
 
+    public static final int SIZE_X = 10;
+    public static final int SIZE_Y = 18;
+
     private Position pos;
     private final int obstacleSpeed = 1;
     private int obstacleTicker;

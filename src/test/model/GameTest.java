@@ -123,6 +123,7 @@ public class GameTest {
 
     @Test
     void testSpawnPoints() {
+
         testGame.spawnPoints();
 
         assertEquals(2, testGame.getPoints().size());
