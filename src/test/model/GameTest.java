@@ -210,6 +210,10 @@ public class GameTest {
         testGame.handleGravitating(100);
         assertTrue(testGame.getGravity().getGravitating());
 
+        testGame.getGravity().setGravitating(true);
+        testGame.handleGravitating(Game.HEIGHT - testGame.getPlayer().HEIGHT);
+        assertFalse(testGame.getGravity().getGravitating());
+
     }
 
     @Test

@@ -6,25 +6,25 @@
                 "X-pos": 1,
                 "Y-pos": 1
             },
-            "Obstacle Speed": 6,
-            "Obstacle Direction": "right",
-            "Decider": 0.4688628079718331
+            "Obstacle Speed": 1,
+            "Obstacle Direction": "down",
+            "Decider": 0.8040713598604868
         },
         {
             "Position": {
                 "X-pos": 2,
                 "Y-pos": 10
             },
-            "Obstacle Speed": 2,
+            "Obstacle Speed": 6,
             "Obstacle Direction": "right",
-            "Decider": 0.11665619223966561
+            "Decider": 0.896489481221597
         }
     ],
     "MaxY": 600,
     "ticker": 0,
     "Points": [{
-        "x": 334,
-        "y": 155
+        "x": 109,
+        "y": 543
     }],
     "Score": 0,
     "PlayerCharacter": {

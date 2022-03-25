@@ -69,6 +69,12 @@ public class PlayerCharacterTest {
         testGame.getPlayer().jump(testGame);
         assertEquals(10 + testGame.getPlayer().getPlayerJumpHeight(), testGame.getPlayer().getPos().getY());
 
+        testGame.setPlayerPosition(20, Game.HEIGHT - PlayerCharacter.HEIGHT);
+        testGame.getGravity().flipGravity();
+        testGame.getPlayer().jump(testGame);
+        assertEquals( Game.HEIGHT - PlayerCharacter.HEIGHT - testGame.getPlayer().getPlayerJumpHeight(),
+                testGame.getPlayer().getPos().getY());
+
 
     }
 
