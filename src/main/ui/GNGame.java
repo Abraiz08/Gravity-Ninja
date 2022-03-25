@@ -44,7 +44,7 @@ public class GNGame extends JFrame {
 
     // MODIFIES: none
     // EFFECTS:  initializes a timer that updates game each
-    //           INTERVAL milliseconds
+    //        /   INTERVAL milliseconds
     private void addTimer() {
         timer = new Timer(INTERVAL, ae -> {
             game.tick();
