@@ -199,12 +199,12 @@ public class PlayerCharacter {
                 &&
              pos.getY() <= p.getY() && (pos.getY() + HEIGHT) >= p.getY());
 
-        //((pos.getX() == p.getX()) && (pos.getY() == p.getY()))
-
     }
 
-    // MODIFIES: json
-    // EFFECTS: adds x and y position of player to json object
+    /*
+     * MODIFIES: json
+     * EFFECTS: adds x and y position of player to json object
+     */
     public JSONObject toJson(JSONObject json) {
         json.put("X-pos", getPos().getX());
         json.put("Y-pos", getPos().getY());
@@ -231,6 +231,10 @@ public class PlayerCharacter {
 
     public int getPlayerGravSpeed() {
         return playerGravSpeed;
+    }
+
+    public int getPlayerMovementSpeed() {
+        return playerMovementSpeed;
     }
 
     public int getPlayerJumpHeight() {

@@ -43,9 +43,8 @@ public class Game implements Writable {
 
     /*
      * MODIFIES: this
-     * EFFECTS: maxX and maxY are set to the biggest values of x and y on the terminal
-     * An object of type Gravity, gravity is created and the gravDirection is set to be -1
-     * An object of type PlayerCharacter, player is created and its position is set to be (0, maxY)
+     * EFFECTS: An object of type Gravity, gravity is created and the gravDirection is set to be -1
+     * An object of type PlayerCharacter, player is created and its position is set to be in the bottom left
      * ticker is given a value of 0
      * A point is added to a random valid position on the game screen
      * secondsPassed is given a value of 0
@@ -75,6 +74,7 @@ public class Game implements Writable {
      * If there are no points on the screen, a new point is spawned on the game screen
      * Counts how many seconds have passed since the game started
      * Spawns obstacles for the player to dodge on the game screen.
+     * Resets double jump and handles gravity.
      */
     public void tick() {
 
@@ -104,10 +104,10 @@ public class Game implements Writable {
 
     /*
      * MODIFIES: this
-     * EFFECTS: Moves every obstacle in the list obstacles once every 5 ticks
+     * EFFECTS: Moves every obstacle in the list obstacles once every 4 ticks
      */
     public void moveAllObstacles() {
-        if (ticker % 5 == 0) {
+        if (ticker % 4 == 0) {
             for (Obstacle obstacle : obstacles) {
                 obstacle.move();
             }
@@ -116,10 +116,10 @@ public class Game implements Writable {
 
     /*
      * MODIFIES: this
-     * EFFECTS: Applies the effect of gravity on the player once every 3 ticks
+     * EFFECTS: Applies the effect of gravity on the player once every 2 ticks
      */
     public void applyGravity() {
-        if ((ticker % 3) == 0) {
+        if ((ticker % 2) == 0) {
             player.getPulledByGravity(gravity.getGravDirection(), Game.HEIGHT);
 
         }

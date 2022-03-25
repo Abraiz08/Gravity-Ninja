@@ -47,15 +47,15 @@ public class Obstacle implements Writable {
 
     /*
      * MODIFIES: this
-     * EFFECTS: randomizes ot (obstacle ticker) using the formula "1 + ((int) (Math.random() * 10))",
-     * but does not allow the ot to exceed 6
+     * EFFECTS: randomizes os (obstacle speed) using the formula "1 + ((int) (Math.random() * 10))",
+     * but does not allow the os to exceed 6
      */
     public int randomizeObstacleSpeed() {
-        int ot = 1 + ((int) (Math.random() * 10));
-        while (ot > 6) {
-            ot = 1 + ((int) (Math.random() * 10));
+        int os = 1 + ((int) (Math.random() * 10));
+        while (os > 6) {
+            os = 1 + ((int) (Math.random() * 10));
         }
-        return ot;
+        return os;
     }
 
     /*
@@ -136,12 +136,9 @@ public class Obstacle implements Writable {
         }
     }
 
-
-    public String getObstacleDirection() {
-        return obstacleDirection;
-    }
-
-    // EFFECTS: returns obstacle as a json object
+    /*
+     *EFFECTS: returns obstacle as a json object
+     */
     @Override
     public JSONObject toJson() {
         JSONObject json = new JSONObject();
@@ -153,7 +150,9 @@ public class Obstacle implements Writable {
         return json;
     }
 
-    // EFFECTS: returns obstacle position as a json object
+    /*
+     * EFFECTS: returns obstacle position as a json object
+     */
     public JSONObject positionToJson() {
         JSONObject json = new JSONObject();
         json = pos.toJson(json);
@@ -163,6 +162,10 @@ public class Obstacle implements Writable {
 
     public Position getPos() {
         return pos;
+    }
+
+    public String getObstacleDirection() {
+        return obstacleDirection;
     }
 
     public double getDecider() {

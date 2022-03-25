@@ -34,8 +34,10 @@ public class Position {
     }
 
 
-    //MODIFIES: json
-    //EFFECTS: returns pos as a json object
+    /*
+     * MODIFIES: json
+     * EFFECTS: returns pos as a json object
+     */
     public JSONObject toJson(JSONObject json) {
         json.put("X-pos", x1);
         json.put("Y-pos", y1);

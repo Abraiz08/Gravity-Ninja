@@ -8,7 +8,7 @@ import java.awt.event.KeyEvent;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class PlayerCharacterTest {
-   /*
+
     private PlayerCharacter testPlayer;
     private Game testGame = new Game();
 
@@ -29,23 +29,23 @@ public class PlayerCharacterTest {
         assertEquals(0, testPlayer.getPos().getX());
 
         testPlayer.move(KeyEvent.VK_RIGHT, testGame);
-        assertEquals(1, testPlayer.getPos().getX());
+        assertEquals(0 + testPlayer.getPlayerMovementSpeed(), testPlayer.getPos().getX());
 
         testGame.setPlayerPosition(3, 20);
         testPlayer.move(KeyEvent.VK_LEFT, testGame);
-        assertEquals(2, testPlayer.getPos().getX());
+        assertEquals(3 - testPlayer.getPlayerMovementSpeed(), testPlayer.getPos().getX());
 
-        testGame.setPlayerPosition(20, 20);
+        testGame.setPlayerPosition(Game.WIDTH, 20);
         testPlayer.move(KeyEvent.VK_RIGHT, testGame);
-        assertEquals(20, testPlayer.getPos().getX());
+        assertEquals(Game.WIDTH, testPlayer.getPos().getX());
 
     }
 
     @Test
     void testUpdateX() {
-        assertEquals(6, testPlayer.updateX(5, testGame, 1));
-        assertEquals(20, testPlayer.updateX(20, testGame, 1));
-        assertEquals(4, testPlayer.updateX(5, testGame, -1));
+        assertEquals(6, testPlayer.updateX(6 - testPlayer.getPlayerMovementSpeed(), testGame, 1));
+        assertEquals(Game.WIDTH, testPlayer.updateX(Game.WIDTH, testGame, 1));
+        assertEquals(4, testPlayer.updateX(4 + testPlayer.getPlayerMovementSpeed(), testGame, -1));
         assertEquals(0, testPlayer.updateX(0, testGame, -1));
 
     }
@@ -115,7 +115,7 @@ public class PlayerCharacterTest {
     void testGetPulledByGravity() {
 
         testPlayer.getPulledByGravity(1, 20);
-        assertEquals(19, testPlayer.getPos().getY());
+        assertEquals(20 - testPlayer.getPlayerGravSpeed(), testPlayer.getPos().getY());
 
 
         testPlayer.getPulledByGravity(-1, 20);
@@ -127,7 +127,7 @@ public class PlayerCharacterTest {
 
         testGame.setPlayerPosition(0, 0);
         testGame.getPlayer().getPulledByGravity(-1, 20);
-        assertEquals(1, testGame.getPlayer().getPos().getY());
+        assertEquals(0, testGame.getPlayer().getPos().getY());
 
 
     }
@@ -141,5 +141,5 @@ public class PlayerCharacterTest {
         assertFalse(testPlayer.hasCollided(p2));
     }
 
-    */
+
 }

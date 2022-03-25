@@ -24,6 +24,10 @@ public class GNGame extends JFrame {
     private static final String JSON_STORE = "./data/gameFiles.json";
     private JsonReader jsonReader = new JsonReader(JSON_STORE);
 
+    /*
+     * MODIFIES: this
+     * EFFECTS: Constructs a game panel and renders all graphics
+     */
     public GNGame() {
         super("GRAVITY NINJA");
         setUndecorated(true);
@@ -42,9 +46,10 @@ public class GNGame extends JFrame {
 
 
 
-    // MODIFIES: none
-    // EFFECTS:  initializes a timer that updates game each
-    //        /   INTERVAL milliseconds
+    /* MODIFIES: none
+     * EFFECTS:  initializes a timer that updates game each INTERVAL
+     */
+    //taken from SpaceInvaders
     private void addTimer() {
         timer = new Timer(INTERVAL, ae -> {
             game.tick();
@@ -58,8 +63,11 @@ public class GNGame extends JFrame {
     }
 
 
-    // MODIFIES: this
-    // EFFECTS:  location of frame is set so frame is centred on desktop
+    /*
+     * MODIFIES: this
+     * EFFECTS:  location of frame is set so frame is centred on desktop
+     */
+    //taken from SpaceInvaders
     private void centreOnScreen() {
         Dimension scrn = Toolkit.getDefaultToolkit().getScreenSize();
         setLocation((scrn.width - getWidth()) / 2, (scrn.height - getHeight()) / 2);
@@ -68,6 +76,7 @@ public class GNGame extends JFrame {
     /*
      * A key handler to respond to key events
      */
+    //taken from SpaceInvaders
     private class KeyHandler extends KeyAdapter {
         @Override
         public void keyPressed(KeyEvent e) {
@@ -79,9 +88,12 @@ public class GNGame extends JFrame {
     }
 
 
+
+    /*
+     * MODIFIES: this, game
+     * EFFECTS: loads game from file
+     */
     // Method taken from JsonSerializationDemo
-    // MODIFIES: this, game
-    // EFFECTS: loads game from file
     private void loadGame() {
         try {
             game = jsonReader.read();
@@ -101,6 +113,9 @@ public class GNGame extends JFrame {
         new GNGame();
     }
 
+    /*
+     * EFFECTS: Checks if the game has ended or not
+     */
     public void checkGameEnded() {
         if (game.isEnded()) {
             timer.stop();

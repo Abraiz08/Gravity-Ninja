@@ -38,8 +38,10 @@ public class Gravity {
 
     }
 
-    // MODIFIES: json
-    // EFFECTS: adds gravDirection and gravitating to the json Object
+    /*
+     * MODIFIES: json
+     * EFFECTS: adds gravDirection and gravitating to the json Object
+     */
     public JSONObject toJson(JSONObject json) {
         json.put("Grav Direction", gravDirection);
         json.put("Gravitating", gravitating);

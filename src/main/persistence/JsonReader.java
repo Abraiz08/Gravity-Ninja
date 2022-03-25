@@ -1,40 +1,45 @@
 package persistence;
 
-import javafx.geometry.Pos;
 import model.*;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Stream;
 
 import org.json.*;
 
-// Represents a reader that reads game from JSON data stored in file
+/*
+ Represents a reader that reads game from JSON data stored in file
+ */
 public class JsonReader {
     private String source;
 
 
-    // EFFECTS: constructs reader to read from source file
+    /*
+     *EFFECTS: constructs reader to read from source file
+     */
     public JsonReader(String source) {
         this.source = source;
     }
 
-    // Method taken from JsonSerializationDemo
-    // EFFECTS: reads game from file and returns it;
-    // throws IOException if an error occurs reading data from file
+    /*
+     * Method taken from JsonSerializationDemo
+     * EFFECTS: reads game from file and returns it;
+     * throws IOException if an error occurs reading data from file
+     */
     public Game read() throws IOException {
         String jsonData = readFile(source);
         JSONObject jsonObject = new JSONObject(jsonData);
         return parseGame(jsonObject);
     }
 
-    // Method taken from JsonSerializationDemo
-    // EFFECTS: reads source file as string and returns it
+    /*
+     * Method taken from JsonSerializationDemo
+     * EFFECTS: reads source file as string and returns it
+     */
     private String readFile(String source) throws IOException {
         StringBuilder contentBuilder = new StringBuilder();
 
@@ -45,16 +50,20 @@ public class JsonReader {
         return contentBuilder.toString();
     }
 
-    // Method taken from JsonSerializationDemo
-    // EFFECTS: parses game from JSON object and returns it
+    /*
+     * Method taken from JsonSerializationDemo
+     * EFFECTS: parses game from JSON object and returns it
+     */
     private Game parseGame(JSONObject jsonObject) {
         Game game = new Game();
         addGame(game, jsonObject);
         return game;
     }
 
-    // MODIFIES: game
-    // EFFECTS: parses thingies from JSON object and adds them to workroom
+    /*
+     * MODIFIES: game
+     * EFFECTS: parses thingies from JSON object and adds them to workroom
+     */
     private void addGame(Game game, JSONObject jsonObject) {
 
         setTicker(game, jsonObject);
@@ -68,24 +77,30 @@ public class JsonReader {
         setCanSpawnObstacles(game, jsonObject);
     }
 
-    // MODIFIES: game
-    // EFFECTS: parses ticker from JSON object and sets its value
+    /*
+     * MODIFIES: game
+     * EFFECTS: parses ticker from JSON object and sets its value
+     */
     public void setTicker(Game game, JSONObject jsonObject) {
 
         int ticker = jsonObject.getInt("ticker");
         game.setTicker(ticker);
     }
 
-    // MODIFIES: game
-    // EFFECTS: parses secondsPassed from JSON object and sets its value
+    /*
+     * MODIFIES: game
+     * EFFECTS: parses secondsPassed from JSON object and sets its value
+     */
     public void setSecondsPassed(Game game, JSONObject jsonObject) {
 
         int secondsPassed = jsonObject.getInt("Seconds passed");
         game.setSecondsPassed(secondsPassed);
     }
 
-    // MODIFIES: game
-    // EFFECTS: parses PlayerCharacter from JSON object and sets its value
+    /*
+     * MODIFIES: game
+     * EFFECTS: parses PlayerCharacter from JSON object and sets its value
+     */
     public void setPlayerCharacter(Game game, JSONObject jsonObject) {
 
         JSONObject player =  jsonObject.getJSONObject("PlayerCharacter");
@@ -96,8 +111,10 @@ public class JsonReader {
         game.setPlayerPosition(xpos, ypos);
     }
 
-    // MODIFIES: game
-    // EFFECTS: parses Gravity from JSON object and sets its value
+    /*
+     * MODIFIES: game
+     * EFFECTS: parses Gravity from JSON object and sets its value
+     */
     public void setGravity(Game game, JSONObject jsonObject) {
 
         JSONObject gravity = jsonObject.getJSONObject("Gravity");
@@ -109,8 +126,10 @@ public class JsonReader {
         game.getGravity().setGravitating(gravitating);
     }
 
-    // MODIFIES: game
-    // EFFECTS: parses points from JSON object and sets its value
+    /*
+     * MODIFIES: game
+     * EFFECTS: parses points from JSON object and sets its value
+     */
     public void setPoints(Game game, JSONObject jsonObject) {
 
         game.getPoints().clear();
@@ -128,16 +147,20 @@ public class JsonReader {
         game.setPoints(points);
     }
 
-    // MODIFIES: game
-    // EFFECTS: parses score from JSON object and sets its value
+    /*
+     * MODIFIES: game
+     * EFFECTS: parses score from JSON object and sets its value
+     */
     public void setScore(Game game, JSONObject jsonObject) {
 
         int score =  jsonObject.getInt("Score");
         game.setScore(score);
     }
 
-    // MODIFIES: game
-    // EFFECTS: parses obstacles from JSON object and sets its value
+    /*
+     * MODIFIES: game
+     * EFFECTS: parses obstacles from JSON object and sets its value
+     */
     public void setObstacles(Game game, JSONObject jsonObject) {
 
         game.getObstacles().clear();
@@ -169,16 +192,20 @@ public class JsonReader {
         game.setObstacles(obstacles);
     }
 
-    // MODIFIES: game
-    // EFFECTS: parses setEnded from JSON object and sets its value
+    /*
+     * MODIFIES: game
+     * EFFECTS: parses setEnded from JSON object and sets its value
+     */
     public void setEnded(Game game, JSONObject jsonObject) {
 
         boolean ended = jsonObject.getBoolean("Ended");
         game.setEnded(ended);
     }
 
-    // MODIFIES: game
-    // EFFECTS: parses canSpawnObstacles from JSON object and sets its value
+    /*
+     * MODIFIES: game
+     * EFFECTS: parses canSpawnObstacles from JSON object and sets its value
+     */
     public void setCanSpawnObstacles(Game game, JSONObject jsonObject) {
 
         boolean canSpawnObstacles = jsonObject.getBoolean("CanSpawnObstacles");

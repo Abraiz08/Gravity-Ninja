@@ -4,7 +4,6 @@ import model.Game;
 import model.Obstacle;
 import model.PlayerCharacter;
 import model.Position;
-import persistence.JsonReader;
 import persistence.JsonWriter;
 
 import javax.swing.*;
@@ -45,7 +44,6 @@ public class TerminalGame extends JPanel {
     /*
      * MODIFIES: this
      * EFFECTS: Renders the current screen.
-     * Draws the end screen if the game has ended, otherwise
      * draws the score, player, points and obstacles.
      */
     private void render(Graphics g) {
@@ -113,13 +111,11 @@ public class TerminalGame extends JPanel {
 
     }
 
-
-
     /*
      * MODIFIES: this
      * EFFECTS: draws the player
      */
-    //found in SnakeConsole-Lanterna Project
+    //found in SpaceInvaders
     private void drawPlayer(Graphics g) {
         PlayerCharacter player = game.getPlayer();
         Color savedCol = g.getColor();
@@ -135,7 +131,7 @@ public class TerminalGame extends JPanel {
      * MODIFIES: this
      * EFFECTS: draws the points
      */
-    //found in SnakeConsole-Lanterna Project
+    //found in SpaceInvaders
     private void drawPoints(Graphics g) {
         for (Position points : game.getPoints()) {
             Color savedCol = g.getColor();
@@ -152,6 +148,7 @@ public class TerminalGame extends JPanel {
      * MODIFIES: this
      * EFFECTS: draws each obstacle in obstacles
      */
+    //found in SpaceInvaders
     private void drawObstacles(Graphics g) {
         for (Obstacle obstacle : game.getObstacles()) {
             Color savedCol = g.getColor();
@@ -176,6 +173,7 @@ public class TerminalGame extends JPanel {
 
     // MODIFIES: g
     // EFFECTS:  draws "game over" and replay instructions onto g
+    //found in SpaceInvaders
     private void gameOver(Graphics g) {
         Color saved = g.getColor();
         g.setColor(new Color(255, 3, 3));
@@ -188,6 +186,7 @@ public class TerminalGame extends JPanel {
 
     // MODIFIES: g
     // EFFECTS:  centres the string str horizontally onto g at vertical position yPos
+    //found in SpaceInvaders
     private void centreString(String str, Graphics g, FontMetrics fm, int ypos) {
         int width = fm.stringWidth(str);
         g.drawString(str, (Game.WIDTH - width) / 2, ypos);

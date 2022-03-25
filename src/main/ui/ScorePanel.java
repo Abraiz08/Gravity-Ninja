@@ -11,6 +11,7 @@ import javax.swing.JPanel;
 
 /*
  * Represents the panel in which the scoreboard is displayed.
+ * Taken from SpaceInvaders
  */
 
 public class ScorePanel extends JPanel {
