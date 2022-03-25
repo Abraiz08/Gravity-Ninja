@@ -8,21 +8,22 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class GameTest {
+
     private Game testGame;
 
     @BeforeEach
     void runBefore() {
-        testGame = new Game(20, 20);
+        testGame = new Game();
     }
 
     @Test
     void testConstructor() {
-       assertEquals(20, testGame.getMaxY());
-       assertEquals(20, testGame.getMaxX());
+       assertEquals(Game.HEIGHT, testGame.getMaxY());
+       assertEquals(Game.WIDTH, testGame.getMaxX());
 
        assertEquals(-1, testGame.getGravity().getGravDirection());
        assertEquals(0, testGame.getPlayer().getPos().getX());
-       assertEquals(20, testGame.getPlayer().getPos().getY());
+       assertEquals(Game.HEIGHT - PlayerCharacter.HEIGHT, testGame.getPlayer().getPos().getY());
 
        assertEquals(0, testGame.getTicker());
 
@@ -72,16 +73,16 @@ public class GameTest {
     void testApplyGravity() {
         testGame.setTicker(30);
         testGame.applyGravity();
-        assertEquals(20, testGame.getPlayer().getPos().getY());
+        assertEquals(Game.HEIGHT - PlayerCharacter.HEIGHT, testGame.getPlayer().getPos().getY());
 
         testGame.setPlayerPosition(0, 15);
         testGame.applyGravity();
-        assertEquals(16, testGame.getPlayer().getPos().getY());
+        assertEquals(15 + testGame.getPlayer().getPlayerGravSpeed(), testGame.getPlayer().getPos().getY());
 
         testGame.getGravity().flipGravity();
         testGame.setPlayerPosition(0, 15);
         testGame.applyGravity();
-        assertEquals(14, testGame.getPlayer().getPos().getY());
+        assertEquals(15 - testGame.getPlayer().getPlayerGravSpeed(), testGame.getPlayer().getPos().getY());
 
         testGame.setPlayerPosition(0, 0);
         testGame.applyGravity();
@@ -90,7 +91,7 @@ public class GameTest {
 
     @Test
     void testCountSeconds() {
-        testGame.setTicker(61);
+        testGame.setTicker(Game.TICKS_PER_SECOND + 1);
         testGame.countSeconds();
         assertEquals (1, testGame.getSecondsPassed());
         assertEquals(0, testGame.getTicker());
@@ -109,9 +110,9 @@ public class GameTest {
 
     @Test
     void testDetectObstacleCollision() {
-        testGame.getObstacles().add(new Obstacle((new Position(5, 5)), 20, 20));
+        testGame.getObstacles().add(new Obstacle((new Position(5, 5)), Game.HEIGHT, Game.WIDTH));
 
-        testGame.setPlayerPosition(3, 5);
+        testGame.setPlayerPosition(20, 700);
         testGame.detectObstacleCollision();
         assertFalse(testGame.isEnded());
 
@@ -139,10 +140,10 @@ public class GameTest {
         Position pos3 = new Position (0,-1);
         assertTrue(testGame.isOutOfBounds(pos3));
 
-        Position pos4 = new Position (21,0);
+        Position pos4 = new Position (Game.WIDTH + 1,0);
         assertTrue(testGame.isOutOfBounds(pos4));
 
-        Position pos5 = new Position (0,21);
+        Position pos5 = new Position (0,Game.HEIGHT + 1);
         assertTrue(testGame.isOutOfBounds(pos5));
 
     }
@@ -160,7 +161,7 @@ public class GameTest {
         testGame.setPlayerPosition(6,0);
         assertFalse(testGame.isValidPosition(pos3));
 
-        Position pos4 = new Position (6,2);
+        Position pos4 = new Position (100,100);
         assertTrue(testGame.isValidPosition(pos4));
 
     }
@@ -197,7 +198,7 @@ public class GameTest {
 
     @Test
     void testSpawnObstacles() {
-        Game testGame2 = new Game(20, 20);
+        Game testGame2 = new Game();
         testGame2.spawnObstacles();
         assertTrue(testGame2.getDecider() > 1);
         assertEquals(0, testGame2.getObstacles().size());
@@ -225,6 +226,8 @@ public class GameTest {
         assertEquals(obj.toString(), json.toString());
 
     }
+
+
 
      
 

@@ -12,6 +12,7 @@ import java.util.Objects;
 //found in SnakeConsole-Lanterna Project
 public class Position {
 
+    public static final int RADIUS = 10;
     private final int x1;
     private final int y1;
 

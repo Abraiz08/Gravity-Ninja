@@ -1,6 +1,5 @@
 package persistence;
 
-import com.googlecode.lanterna.TerminalSize;
 import javafx.geometry.Pos;
 import model.*;
 import java.io.IOException;
@@ -49,9 +48,7 @@ public class JsonReader {
     // Method taken from JsonSerializationDemo
     // EFFECTS: parses game from JSON object and returns it
     private Game parseGame(JSONObject jsonObject) {
-        int maxX = jsonObject.getInt("MaxX");
-        int maxY = jsonObject.getInt("MaxY");
-        Game game = new Game(maxX, maxY);
+        Game game = new Game();
         addGame(game, jsonObject);
         return game;
     }
@@ -161,11 +158,10 @@ public class JsonReader {
 
             Obstacle o = new Obstacle(pos, maxX, maxY);
 
-            int ticker = ((JSONObject) json).getInt("Obstacle Ticker");
+
             String obstacleDirection = ((JSONObject) json).getString("Obstacle Direction");
             double decider = ((JSONObject) json).getDouble("Decider");
 
-            o.setObstacleTicker(ticker);
             o.setObstacleDirection(obstacleDirection);
             o.setDecider(decider);
             obstacles.add(o);

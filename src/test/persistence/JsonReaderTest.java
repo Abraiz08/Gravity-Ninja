@@ -26,7 +26,7 @@ class JsonReaderTest {
         JsonReader reader = new JsonReader("./data/testReaderEmptyGame.json");
         try {
             Game game = reader.read();
-            assertEquals(20, game.getMaxX());
+            assertEquals(Game.WIDTH, game.getMaxX());
             assertEquals(0, game.getObstacles().size());
         } catch (IOException e) {
             fail("Couldn't read from file");
@@ -40,8 +40,8 @@ class JsonReaderTest {
             Game game = reader.read();
             Position pos = new Position(1, 1);
             Position pos2 = new Position(2, 10);
-            assertEquals(20, game.getMaxX());
-            assertEquals(20, game.getMaxY());
+            assertEquals(Game.WIDTH, game.getMaxX());
+            assertEquals(Game.HEIGHT, game.getMaxY());
 
             List<Obstacle> obstacles = game.getObstacles();
             assertEquals(2, obstacles.size());

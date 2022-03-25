@@ -21,7 +21,10 @@ import persistence.Writable;
 //some variable names are taken from the SnakeGame example provided to us
 public class Game implements Writable {
 
-    public static final int TICKS_PER_SECOND = 60;
+    public static final int WIDTH = 1400;
+    public static final int HEIGHT = 600;
+
+    public static final int TICKS_PER_SECOND = 200;
 
     private int ticker;
     private int secondsPassed;
@@ -36,9 +39,6 @@ public class Game implements Writable {
     private boolean ended = false;
     private boolean canSpawnObstacle = true;
 
-    private final int maxX;
-    private final int maxY;
-
     private double decider;
 
     /*
@@ -50,12 +50,11 @@ public class Game implements Writable {
      * A point is added to a random valid position on the game screen
      * secondsPassed is given a value of 0
      */
-    public Game(int maxX, int maxY) {
-        this.maxX = maxX;
-        this.maxY = maxY;
+    public Game() {
+
 
         gravity = new Gravity(-1);
-        player = new PlayerCharacter(0, maxY);
+        player = new PlayerCharacter(0, HEIGHT - player.HEIGHT);
 
         ticker = 0;
 
@@ -97,6 +96,10 @@ public class Game implements Writable {
 
         spawnObstacles();
 
+        getPlayer().resetDoubleJump(this);
+
+        handleGravitating(getPlayer().getPos().getY());
+
     }
 
     /*
@@ -106,7 +109,7 @@ public class Game implements Writable {
     public void moveAllObstacles() {
         if (ticker % 5 == 0) {
             for (Obstacle obstacle : obstacles) {
-                obstacle.move(TICKS_PER_SECOND);
+                obstacle.move();
             }
         }
     }
@@ -117,7 +120,7 @@ public class Game implements Writable {
      */
     public void applyGravity() {
         if ((ticker % 3) == 0) {
-            player.getPulledByGravity(gravity.getGravDirection(), maxY);
+            player.getPulledByGravity(gravity.getGravDirection(), Game.HEIGHT);
 
         }
     }
@@ -157,7 +160,7 @@ public class Game implements Writable {
      */
     public void detectObstacleCollision() {
         for (Obstacle obstacle : obstacles) {
-            if (player.hasCollided(obstacle.getPos())) {
+            if (player.hasCollidedWithObstacle(obstacle.getPos())) {
                 ended = true;
             }
         }
@@ -187,8 +190,8 @@ public class Game implements Writable {
     public boolean isOutOfBounds(Position pos) {
         return pos.getX() < 0
                 || pos.getY() < 0
-                || pos.getX() > maxX
-                || pos.getY() > maxY;
+                || pos.getX() > WIDTH
+                || pos.getY() > HEIGHT;
     }
 
 
@@ -211,9 +214,9 @@ public class Game implements Writable {
     public boolean isValidPositionForObstacle(Position pos) {
         return  isValidPosition(pos)
               && ((pos.getY() < 5)
-              || (pos.getY() > (maxY - 5)
+              || (pos.getY() > (HEIGHT - 5)
               || (pos.getX() < 5)
-              || (pos.getX() > maxX - 5)));
+              || (pos.getX() > WIDTH - 5)));
     }
 
     /*
@@ -262,7 +265,7 @@ public class Game implements Writable {
         }
 
         if (ticker == TICKS_PER_SECOND && canSpawnObstacle) {
-            obstacles.add(new Obstacle(pos, maxX, maxY));
+            obstacles.add(new Obstacle(pos, WIDTH, HEIGHT));
 
         }
 
@@ -275,9 +278,21 @@ public class Game implements Writable {
     //found in SnakeConsole-Lanterna Project
     private Position generateRandomPosition() {
         return new Position(
-                ThreadLocalRandom.current().nextInt(maxX),
-                ThreadLocalRandom.current().nextInt(maxY)
+                ThreadLocalRandom.current().nextInt(WIDTH),
+                ThreadLocalRandom.current().nextInt(HEIGHT)
         );
+    }
+
+    /* MODIFIES: game
+     * EFFECTS: Sets gravitating to false once the user touches the floor or ceiling
+     * of the game arena
+     */
+    private void handleGravitating(int posY) {
+        if (getGravity().getGravitating()  && (posY == 0
+                || posY == getMaxY() - player.HEIGHT)) {
+
+            getGravity().noLongerGravitating();
+        }
     }
 
     // MODIFIES: this
@@ -294,8 +309,8 @@ public class Game implements Writable {
         json.put("Score", score);
         json.put("Ended", ended);
         json.put("CanSpawnObstacles", canSpawnObstacle);
-        json.put("MaxX", maxX);
-        json.put("MaxY", maxY);
+        json.put("MaxX", WIDTH);
+        json.put("MaxY", HEIGHT);
         json.put("Decider", decider);
         return json;
     }
@@ -353,11 +368,11 @@ public class Game implements Writable {
     }
 
     public int getMaxX() {
-        return maxX;
+        return WIDTH;
     }
 
     public int getMaxY() {
-        return maxY;
+        return HEIGHT;
     }
 
     public double getDecider() {

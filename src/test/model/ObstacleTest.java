@@ -36,8 +36,8 @@ public class ObstacleTest {
 
     @Test
     void testRandomizeObstacleSpeed() {
-        assertTrue(0 < testObstacle.getObstacleTicker()
-        && testObstacle.getObstacleTicker() <= 6);
+        assertTrue(0 < testObstacle.getObStacleSpeed()
+        && testObstacle.getObStacleSpeed() <= 6);
     }
 
     @Test
@@ -99,33 +99,32 @@ public class ObstacleTest {
 
     @Test
     void testMove() {
-        testObstacle.setObstacleTicker(20);
 //right
         testPos = new Position(1, 8);
         testObstacle.decideObstacleDirection(testPos, 20, 20, testObstacle.getDecider());
-        testObstacle.move(60);
+        testObstacle.move();
 
-        assertEquals(2, testObstacle.getPos().getX());
+        assertEquals( 1 + testObstacle.getObStacleSpeed(), testObstacle.getPos().getX());
 //left
         Position testPos2 = new Position(16, 8);
         Obstacle testObstacle2 = new Obstacle (testPos2, 20, 20);
         testObstacle2.decideObstacleDirection(testPos2, 20, 20, testObstacle2.getDecider());
-        testObstacle2.move(60);
+        testObstacle2.move();
 
-        assertEquals(15, testObstacle2.getPos().getX());
+        assertEquals(16 - testObstacle2.getObStacleSpeed(), testObstacle2.getPos().getX());
 //up
         Position testPos3 = new Position(8, 16);
         Obstacle testObstacle3 = new Obstacle (testPos3, 20, 20);
         testObstacle3.decideObstacleDirection(testPos3, 20, 20, testObstacle3.getDecider());
-        testObstacle3.move(60);
+        testObstacle3.move();
 
-        assertEquals(15, testObstacle3.getPos().getY());
+        assertEquals(16 - testObstacle3.getObStacleSpeed(), testObstacle3.getPos().getY());
 //down
         testPos = new Position(8, 1);
         testObstacle.decideObstacleDirection(testPos, 20, 20, testObstacle.getDecider());
-        testObstacle.move(60);
+        testObstacle.move();
 
-        assertEquals(2, testObstacle.getPos().getY());
+        assertEquals(1 + testObstacle.getObStacleSpeed(), testObstacle.getPos().getY());
 
     }
 

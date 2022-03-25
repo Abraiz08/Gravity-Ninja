@@ -1,15 +1,23 @@
 package model;
 
-import com.googlecode.lanterna.input.KeyType;
 import org.json.JSONObject;
+
+import java.awt.*;
+import java.awt.event.KeyEvent;
 
 /**
  * Class representing the player character
  */
 public class PlayerCharacter {
 
-    private final int playerJumpHeight = 6;
-    private final int playerMovementSpeed = 1;
+    public static final Color COLOR = Color.GREEN;
+    public static final int WIDTH = 15;
+    public static final int HEIGHT = 20;
+
+
+    private final int playerJumpHeight = 40;
+    private final int playerMovementSpeed = 3;
+    private final int playerGravSpeed = 5;
     private int maxJumps = 1;
 
     private Position pos;
@@ -32,13 +40,13 @@ public class PlayerCharacter {
      * MODIFIES: this, game
      * EFFECTS: Moves the player left and right on the screen depending on the arrow key pressed
      */
-    public void move(KeyType key, Game game) {
+    public void move(int key, Game game) {
 
         int x = game.getPlayer().getPos().getX();
         int y = game.getPlayer().getPos().getY();
 
 //for x
-        if (key == KeyType.ArrowLeft) {
+        if (key == KeyEvent.VK_LEFT) {
             if (x > 0) {
                 pos = new Position(
                         updateX(x, game, -1),
@@ -48,8 +56,8 @@ public class PlayerCharacter {
                 pos = game.getPlayer().getPos();
             }
 //for y
-        } else if (key == KeyType.ArrowRight) {
-            if (x < game.getMaxX()) {
+        } else if (key == KeyEvent.VK_RIGHT) {
+            if (x < game.getMaxX() - PlayerCharacter.WIDTH / 2) {
                 pos = new Position(
                         updateX(x, game, 1),
                         y
@@ -106,7 +114,7 @@ public class PlayerCharacter {
                     pos.getY() + playerJumpHeight
             );
 
-        } else if (pos.getY() == game.getMaxY()) {
+        } else if (pos.getY() == game.getMaxY() - PlayerCharacter.HEIGHT) {
             pos = new Position(
                     pos.getX(),
                     pos.getY() - playerJumpHeight
@@ -134,7 +142,8 @@ public class PlayerCharacter {
      *  resetting the double jump and allowing the player to execute it again.
      */
     public void resetDoubleJump(Game game) {
-        if ((game.getPlayer().getPos().getY() == 0 || game.getPlayer().getPos().getY() == game.getMaxY())
+        if ((game.getPlayer().getPos().getY() == 0
+                || game.getPlayer().getPos().getY() == game.getMaxY() - PlayerCharacter.HEIGHT)
                 && game.getGravity().getGravitating() == false) {
             game.getPlayer().setMaxJumpsToOne();
         }
@@ -153,17 +162,17 @@ public class PlayerCharacter {
 
                 pos = new Position(
                         pos.getX(),
-                        pos.getY() - 1
+                        pos.getY() - playerGravSpeed
                 );
 
             }
         } else {
 
-            if (pos.getY() != maxY) {
+            if (pos.getY() != maxY - PlayerCharacter.HEIGHT) {
 
                 pos = new Position(
                         pos.getX(),
-                        pos.getY() + 1
+                        pos.getY() + playerGravSpeed
                     );
 
             }
@@ -171,11 +180,27 @@ public class PlayerCharacter {
     }
 
     /*
-     * EFFECTS: returns true if the position of the player is equal to the position of the object passed as
+     * EFFECTS: returns true if the position of the player is lies within the position of the object passed as
      * an argument
      */
+    public boolean hasCollidedWithObstacle(Position p) {
+        Rectangle o = new Rectangle(p.getX(), p.getY(), Obstacle.WIDTH, Obstacle.HEIGHT);
+        Rectangle player = new Rectangle(pos.getX(), pos.getY(), WIDTH, HEIGHT);
+        return player.intersects(o);
+
+    }
+
+    /*
+     * EFFECTS: returns true if the position passed lies within the position of the player
+     */
     public boolean hasCollided(Position p) {
-        return ((pos.getX() == p.getX()) && (pos.getY() == p.getY()));
+
+        return (pos.getX() - WIDTH <= p.getX() && (pos.getX() + WIDTH)  >= p.getX()
+                &&
+             pos.getY() <= p.getY() && (pos.getY() + HEIGHT) >= p.getY());
+
+        //((pos.getX() == p.getX()) && (pos.getY() == p.getY()))
+
     }
 
     // MODIFIES: json
@@ -190,6 +215,8 @@ public class PlayerCharacter {
         maxJumps = 0;
     }
 
+
+
     public void setMaxJumpsToOne() {
         maxJumps = 1;
     }
@@ -200,6 +227,10 @@ public class PlayerCharacter {
 
     public int getMaxJumps() {
         return maxJumps;
+    }
+
+    public int getPlayerGravSpeed() {
+        return playerGravSpeed;
     }
 
     public int getPlayerJumpHeight() {

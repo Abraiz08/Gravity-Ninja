@@ -8,9 +8,11 @@ import persistence.Writable;
  */
 public class Obstacle implements Writable {
 
+    public static final int WIDTH = 15;
+    public static final int HEIGHT = 20;
+
     private Position pos;
-    private final int obstacleSpeed = 1;
-    private int obstacleTicker;
+    private final int obstacleSpeed;
     private double decider;
     private String obstacleDirection;
 
@@ -29,7 +31,7 @@ public class Obstacle implements Writable {
 
         this.pos = new Position(pos.getX(), pos.getY());
 
-        obstacleTicker = randomizeObstacleSpeed();
+        obstacleSpeed = randomizeObstacleSpeed();
 
         randomizeDecider();
         decideObstacleDirection(pos, maxX, maxY, decider);
@@ -109,32 +111,31 @@ public class Obstacle implements Writable {
      * EFFECTS: Moves the obstacle in the direction it is supposed to move, with the magnitude obstacleSpeed,
      * once every time (tps % obstacleTicker == 0), where tps is TICKS_PER_SECOND
      */
-    public void move(int tps) {
-        if (tps % obstacleTicker == 0) {
+    public void move() {
 
-            if (obstacleDirection.equals("right")) {
-                pos = new Position(
+        if (obstacleDirection.equals("right")) {
+            pos = new Position(
                         pos.getX() + obstacleSpeed,
                         pos.getY()
-                );
-            } else if (obstacleDirection.equals("left")) {
-                pos = new Position(
+            );
+        } else if (obstacleDirection.equals("left")) {
+            pos = new Position(
                         pos.getX() - obstacleSpeed,
                         pos.getY()
-                );
-            } else if (obstacleDirection.equals("up")) {
-                pos = new Position(
+            );
+        } else if (obstacleDirection.equals("up")) {
+            pos = new Position(
                         pos.getX(),
                         pos.getY() - obstacleSpeed
-                );
-            } else if (obstacleDirection.equals("down")) {
-                pos = new Position(
+            );
+        } else if (obstacleDirection.equals("down")) {
+            pos = new Position(
                         pos.getX(),
                         pos.getY() + obstacleSpeed
-                );
-            }
+            );
         }
     }
+
 
     public String getObstacleDirection() {
         return obstacleDirection;
@@ -146,7 +147,6 @@ public class Obstacle implements Writable {
         JSONObject json = new JSONObject();
         json.put("Position", positionToJson());
         json.put("Obstacle Speed", obstacleSpeed);
-        json.put("Obstacle Ticker", obstacleTicker);
         json.put("Decider", decider);
         json.put("Obstacle Direction", obstacleDirection);
 
@@ -169,16 +169,12 @@ public class Obstacle implements Writable {
         return decider;
     }
 
-    public double getObstacleTicker() {
-        return obstacleTicker;
-    }
-
-    public void setObstacleTicker(int ot) {
-        obstacleTicker = ot;
-    }
-
     public void setDecider(double decider) {
         this.decider = decider;
+    }
+
+    public int getObStacleSpeed() {
+        return obstacleSpeed;
     }
 
     public void setObstacleDirection(String obstacleDirection) {
