@@ -4,6 +4,8 @@ import model.Game;
 import persistence.JsonReader;
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.io.IOException;
@@ -20,6 +22,15 @@ public class GNGame extends JFrame {
     private TerminalGame gamePanel;
     private ScorePanel scorePanel;
     private Timer timer;
+    private SplashScreen splashScreen;
+
+    private JMenuBar menuBar;
+    JMenu file = new JMenu("File");
+    JMenuItem save = new JMenuItem("Save");
+    JMenuItem load = new JMenuItem("Load");
+    JMenu exit = new JMenu("Exit");
+    JMenuItem close = new JMenuItem("Close Game");
+
 
     private static final String JSON_STORE = "./data/gameFiles.json";
     private JsonReader jsonReader = new JsonReader(JSON_STORE);
@@ -31,15 +42,30 @@ public class GNGame extends JFrame {
     public GNGame() {
         super("GRAVITY NINJA");
         setUndecorated(true);
+
+        splashScreen = new SplashScreen();
+        add(splashScreen);
+        pack();
+        centreOnScreen();
+        setVisible(true);
+        try {
+            Thread.sleep(5000);
+            remove(splashScreen);
+        } catch (Exception e) {
+            System.out.println("Startup Failed");
+        }
+
+
         game = new Game();
         gamePanel = new TerminalGame(game);
         scorePanel  = new ScorePanel(game);
+        createMenuBar();
+        setJMenuBar(menuBar);
         add(gamePanel);
         add(scorePanel, BorderLayout.NORTH);
         addKeyListener(new KeyHandler());
         pack();
         centreOnScreen();
-        setVisible(true);
         addTimer();
     }
 
@@ -60,6 +86,56 @@ public class GNGame extends JFrame {
         });
 
         timer.start();
+    }
+
+    /*
+    MODIFIES: this
+    EFFECTS: Constructs a menuBar
+     */
+    public void createMenuBar() {
+        menuBar = new JMenuBar();
+
+        menuBar.add(file);
+        menuBar.add(exit);
+
+        file.add(save);
+        file.add(load);
+
+        exit.add(close);
+
+        createActionListeners();
+
+    }
+
+    /*
+    MODIFIES: this, game
+    EFFECTS: Creates action listeners for the menu bar
+     */
+    public void createActionListeners() {
+        class SaveAction implements ActionListener {
+            public void actionPerformed(ActionEvent e) {
+                gamePanel.saveGame();
+
+            }
+        }
+
+        class LoadAction implements ActionListener {
+            public void actionPerformed(ActionEvent e) {
+                loadGame();
+            }
+        }
+
+        class CloseAction implements ActionListener {
+            public void actionPerformed(ActionEvent e) {
+                System.exit(0);
+            }
+        }
+
+        save.addActionListener(new SaveAction());
+        load.addActionListener(new LoadAction());
+        close.addActionListener(new CloseAction());
+
+
     }
 
 
@@ -126,3 +202,4 @@ public class GNGame extends JFrame {
         this.game = game;
     }
 }
+

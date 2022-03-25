@@ -287,7 +287,7 @@ public class Game implements Writable {
      * EFFECTS: Sets gravitating to false once the user touches the floor or ceiling
      * of the game arena
      */
-    private void handleGravitating(int posY) {
+    public void handleGravitating(int posY) {
         if (getGravity().getGravitating()  && (posY == 0
                 || posY == getMaxY() - player.HEIGHT)) {
 

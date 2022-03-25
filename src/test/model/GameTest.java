@@ -197,6 +197,22 @@ public class GameTest {
     }
 
     @Test
+    void testHandleGravitating() {
+        testGame.getGravity().setGravitating(false);
+        testGame.handleGravitating(30);
+        assertFalse(testGame.getGravity().getGravitating());
+
+        testGame.getGravity().setGravitating(true);
+        testGame.handleGravitating(0);
+        assertFalse(testGame.getGravity().getGravitating());
+
+        testGame.getGravity().setGravitating(true);
+        testGame.handleGravitating(100);
+        assertTrue(testGame.getGravity().getGravitating());
+
+    }
+
+    @Test
     void testSpawnObstacles() {
         Game testGame2 = new Game();
         testGame2.spawnObstacles();

@@ -99,7 +99,7 @@ public class TerminalGame extends JPanel {
 
     // Method taken from JsonSerializationDemo
     // EFFECTS: saves the game to file
-    private void saveGame() {
+    public void saveGame() {
         try {
             jsonWriter.open();
             jsonWriter.write(game);

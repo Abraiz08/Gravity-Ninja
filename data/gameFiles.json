@@ -3,292 +3,76 @@
     "Obstacles": [
         {
             "Position": {
-                "X-pos": 1217,
-                "Y-pos": 2424
-            },
-            "Obstacle Speed": 6,
-            "Obstacle Direction": "down",
-            "Decider": 0.3768598618750314
-        },
-        {
-            "Position": {
-                "X-pos": 2424,
-                "Y-pos": 539
-            },
-            "Obstacle Speed": 6,
-            "Obstacle Direction": "right",
-            "Decider": 0.7189527951184956
-        },
-        {
-            "Position": {
-                "X-pos": 1117,
-                "Y-pos": -11
-            },
-            "Obstacle Speed": 2,
-            "Obstacle Direction": "up",
-            "Decider": 0.805375964823708
-        },
-        {
-            "Position": {
-                "X-pos": 306,
-                "Y-pos": -618
-            },
-            "Obstacle Speed": 4,
-            "Obstacle Direction": "up",
-            "Decider": 0.10298569087802989
-        },
-        {
-            "Position": {
-                "X-pos": 182,
-                "Y-pos": 278
-            },
-            "Obstacle Speed": 4,
-            "Obstacle Direction": "left",
-            "Decider": 0.9086323864076067
-        },
-        {
-            "Position": {
-                "X-pos": 1520,
-                "Y-pos": 0
-            },
-            "Obstacle Speed": 5,
-            "Obstacle Direction": "right",
-            "Decider": 0.04170218958852878
-        },
-        {
-            "Position": {
-                "X-pos": 983,
-                "Y-pos": -922
+                "X-pos": 860,
+                "Y-pos": 179
             },
             "Obstacle Speed": 5,
             "Obstacle Direction": "up",
-            "Decider": 0.7628699312208924
+            "Decider": 0.02910621220866816
         },
         {
             "Position": {
-                "X-pos": -428,
-                "Y-pos": 219
-            },
-            "Obstacle Speed": 6,
-            "Obstacle Direction": "left",
-            "Decider": 0.4846964962269231
-        },
-        {
-            "Position": {
-                "X-pos": 485,
-                "Y-pos": 144
-            },
-            "Obstacle Speed": 3,
-            "Obstacle Direction": "left",
-            "Decider": 0.31726981765540785
-        },
-        {
-            "Position": {
-                "X-pos": 1218,
-                "Y-pos": 458
-            },
-            "Obstacle Speed": 4,
-            "Obstacle Direction": "right",
-            "Decider": 0.8332847646779363
-        },
-        {
-            "Position": {
-                "X-pos": 890,
-                "Y-pos": 443
+                "X-pos": 1013,
+                "Y-pos": 576
             },
             "Obstacle Speed": 2,
             "Obstacle Direction": "left",
-            "Decider": 0.7673295132722565
+            "Decider": 0.008253261115531596
         },
         {
             "Position": {
-                "X-pos": 948,
-                "Y-pos": 1272
-            },
-            "Obstacle Speed": 5,
-            "Obstacle Direction": "down",
-            "Decider": 0.3071772392665413
-        },
-        {
-            "Position": {
-                "X-pos": 1044,
-                "Y-pos": 1017
-            },
-            "Obstacle Speed": 4,
-            "Obstacle Direction": "down",
-            "Decider": 0.2071220337282349
-        },
-        {
-            "Position": {
-                "X-pos": 427,
-                "Y-pos": -673
-            },
-            "Obstacle Speed": 5,
-            "Obstacle Direction": "up",
-            "Decider": 0.6610372580988676
-        },
-        {
-            "Position": {
-                "X-pos": 783,
-                "Y-pos": 291
+                "X-pos": 1066,
+                "Y-pos": 161
             },
             "Obstacle Speed": 2,
-            "Obstacle Direction": "up",
-            "Decider": 0.9875036942689106
-        },
-        {
-            "Position": {
-                "X-pos": 927,
-                "Y-pos": 216
-            },
-            "Obstacle Speed": 6,
-            "Obstacle Direction": "right",
-            "Decider": 0.04770868344890855
-        },
-        {
-            "Position": {
-                "X-pos": 586,
-                "Y-pos": -20
-            },
-            "Obstacle Speed": 4,
-            "Obstacle Direction": "up",
-            "Decider": 0.10159283594723978
-        },
-        {
-            "Position": {
-                "X-pos": 162,
-                "Y-pos": 135
-            },
-            "Obstacle Speed": 3,
-            "Obstacle Direction": "up",
-            "Decider": 0.45011287625318797
-        },
-        {
-            "Position": {
-                "X-pos": 475,
-                "Y-pos": 258
-            },
-            "Obstacle Speed": 6,
             "Obstacle Direction": "left",
-            "Decider": 0.45433028234448913
+            "Decider": 0.4681290392899946
         },
         {
             "Position": {
-                "X-pos": 24,
-                "Y-pos": 772
-            },
-            "Obstacle Speed": 5,
-            "Obstacle Direction": "down",
-            "Decider": 0.2739343492563412
-        },
-        {
-            "Position": {
-                "X-pos": 620,
-                "Y-pos": 552
-            },
-            "Obstacle Speed": 4,
-            "Obstacle Direction": "right",
-            "Decider": 0.406123646818085
-        },
-        {
-            "Position": {
-                "X-pos": 519,
-                "Y-pos": 492
+                "X-pos": 0,
+                "Y-pos": 297
             },
             "Obstacle Speed": 1,
             "Obstacle Direction": "up",
-            "Decider": 0.08351628893634344
+            "Decider": 0.8904388678370593
         },
         {
             "Position": {
-                "X-pos": 761,
-                "Y-pos": -27
-            },
-            "Obstacle Speed": 6,
-            "Obstacle Direction": "up",
-            "Decider": 0.6466345241433153
-        },
-        {
-            "Position": {
-                "X-pos": 1188,
-                "Y-pos": 506
-            },
-            "Obstacle Speed": 2,
-            "Obstacle Direction": "left",
-            "Decider": 0.6299241655814659
-        },
-        {
-            "Position": {
-                "X-pos": 853,
-                "Y-pos": 492
+                "X-pos": 196,
+                "Y-pos": 285
             },
             "Obstacle Speed": 1,
-            "Obstacle Direction": "up",
-            "Decider": 0.11292791079129694
-        },
-        {
-            "Position": {
-                "X-pos": 524,
-                "Y-pos": 259
-            },
-            "Obstacle Speed": 5,
             "Obstacle Direction": "right",
-            "Decider": 0.7027408132829138
+            "Decider": 0.1110262403992226
         },
         {
             "Position": {
-                "X-pos": 1269,
-                "Y-pos": 77
+                "X-pos": 346,
+                "Y-pos": 393
             },
             "Obstacle Speed": 5,
             "Obstacle Direction": "up",
-            "Decider": 0.88866929509722
-        },
-        {
-            "Position": {
-                "X-pos": 863,
-                "Y-pos": 18
-            },
-            "Obstacle Speed": 4,
-            "Obstacle Direction": "down",
-            "Decider": 0.4711941056899025
-        },
-        {
-            "Position": {
-                "X-pos": 1350,
-                "Y-pos": 12
-            },
-            "Obstacle Speed": 2,
-            "Obstacle Direction": "down",
-            "Decider": 0.854627174435721
-        },
-        {
-            "Position": {
-                "X-pos": 1390,
-                "Y-pos": 463
-            },
-            "Obstacle Speed": 2,
-            "Obstacle Direction": "left",
-            "Decider": 0.4686470807608929
+            "Decider": 0.49610695523814463
         }
     ],
     "MaxY": 600,
-    "ticker": 19,
+    "ticker": 137,
     "Points": [{
-        "x": 655,
-        "y": 579
+        "x": 760,
+        "y": 453
     }],
-    "Score": 2,
+    "Score": 0,
     "PlayerCharacter": {
-        "X-pos": 680,
-        "Y-pos": 205
+        "X-pos": 378,
+        "Y-pos": 0
     },
     "Ended": false,
     "CanSpawnObstacles": true,
-    "Seconds passed": 9,
+    "Seconds passed": 2,
     "Gravity": {
-        "Grav Direction": -1,
-        "Gravitating": true
+        "Grav Direction": 1,
+        "Gravitating": false
     },
-    "Decider": 4.571122860896827
+    "Decider": 7.00079828301753
 }

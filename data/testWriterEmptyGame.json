@@ -1,16 +1,16 @@
 {
-    "MaxX": 20,
+    "MaxX": 1400,
     "Obstacles": [],
-    "MaxY": 20,
+    "MaxY": 600,
     "ticker": 0,
     "Points": [{
-        "x": 9,
-        "y": 12
+        "x": 356,
+        "y": 143
     }],
     "Score": 0,
     "PlayerCharacter": {
         "X-pos": 0,
-        "Y-pos": 20
+        "Y-pos": 580
     },
     "Ended": false,
     "CanSpawnObstacles": true,
