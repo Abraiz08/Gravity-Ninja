@@ -44,17 +44,7 @@ public class GNGame extends JFrame {
         setUndecorated(true);
 
         splashScreen = new SplashScreen();
-        add(splashScreen);
-        pack();
-        centreOnScreen();
-        setVisible(true);
-        try {
-            Thread.sleep(5000);
-            remove(splashScreen);
-        } catch (Exception e) {
-            System.out.println("Startup Failed");
-        }
-
+        putSplashScreen();
 
         game = new Game();
         gamePanel = new TerminalGame(game);
@@ -69,8 +59,21 @@ public class GNGame extends JFrame {
         addTimer();
     }
 
-
-
+    /*
+    EFFECTS: Displays the splash screen
+     */
+    private void putSplashScreen() {
+        add(splashScreen);
+        pack();
+        centreOnScreen();
+        setVisible(true);
+        try {
+            Thread.sleep(5000);
+            remove(splashScreen);
+        } catch (Exception e) {
+            System.out.println("Startup Failed");
+        }
+    }
 
     /* MODIFIES: none
      * EFFECTS:  initializes a timer that updates game each INTERVAL
