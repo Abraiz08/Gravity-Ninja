@@ -35,124 +35,36 @@ character, and the score to file using the 's' key, or through the menu bar.
 
 ## Phase 4: task 2:
 
-Tue Mar 29 19:12:08 PDT 2022
-Spawned obstacle model.Obstacle@5d2bb922 at 775, 596.
+Thu Mar 31 20:23:28 PDT 2022
+Spawned obstacle model.Obstacle@5d2bb922 at 19, 4.
 
 
-Tue Mar 29 19:12:08 PDT 2022
-Spawned obstacle model.Obstacle@32f60657 at 1008, 4.
+Thu Mar 31 20:23:28 PDT 2022
+Spawned obstacle model.Obstacle@32f60657 at 1355, 596.
 
 
-Tue Mar 29 19:12:08 PDT 2022
-Spawned obstacle model.Obstacle@32144b82 at 2, 159.
+Thu Mar 31 20:23:28 PDT 2022
+Spawned obstacle model.Obstacle@32144b82 at 41, 0.
 
 
-Tue Mar 29 19:12:08 PDT 2022
-Moved obstacle model.Obstacle@5d2bb922 upwards.
+Thu Mar 31 20:23:28 PDT 2022
+Spawned obstacle model.Obstacle@439449f0 at 994, 597.
 
 
-Tue Mar 29 19:12:08 PDT 2022
-Moved obstacle model.Obstacle@32f60657 downwards.
+Thu Mar 31 20:23:28 PDT 2022
+Moved obstacle model.Obstacle@5d2bb922 down
 
 
-Tue Mar 29 19:12:08 PDT 2022
-Moved obstacle model.Obstacle@32144b82 to the right.
+Thu Mar 31 20:23:28 PDT 2022
+Moved obstacle model.Obstacle@32f60657 up
 
 
-Tue Mar 29 19:12:08 PDT 2022
-Moved obstacle model.Obstacle@5d2bb922 upwards.
+Thu Mar 31 20:23:28 PDT 2022
+Moved obstacle model.Obstacle@32144b82 down
 
 
-Tue Mar 29 19:12:08 PDT 2022
-Moved obstacle model.Obstacle@32f60657 downwards.
-
-
-Tue Mar 29 19:12:08 PDT 2022
-Moved obstacle model.Obstacle@32144b82 to the right.
-
-
-Tue Mar 29 19:12:08 PDT 2022
-Moved obstacle model.Obstacle@5d2bb922 upwards.
-
-
-Tue Mar 29 19:12:08 PDT 2022
-Moved obstacle model.Obstacle@32f60657 downwards.
-
-
-Tue Mar 29 19:12:08 PDT 2022
-Moved obstacle model.Obstacle@32144b82 to the right.
-
-
-Tue Mar 29 19:12:08 PDT 2022
-Moved obstacle model.Obstacle@5d2bb922 upwards.
-
-
-Tue Mar 29 19:12:08 PDT 2022
-Moved obstacle model.Obstacle@32f60657 downwards.
-
-
-Tue Mar 29 19:12:08 PDT 2022
-Moved obstacle model.Obstacle@32144b82 to the right.
-
-
-Tue Mar 29 19:12:08 PDT 2022
-Moved obstacle model.Obstacle@5d2bb922 upwards.
-
-
-Tue Mar 29 19:12:08 PDT 2022
-Moved obstacle model.Obstacle@32f60657 downwards.
-
-
-Tue Mar 29 19:12:08 PDT 2022
-Moved obstacle model.Obstacle@32144b82 to the right.
-
-
-Tue Mar 29 19:12:08 PDT 2022
-Moved obstacle model.Obstacle@5d2bb922 upwards.
-
-
-Tue Mar 29 19:12:08 PDT 2022
-Moved obstacle model.Obstacle@32f60657 downwards.
-
-
-Tue Mar 29 19:12:08 PDT 2022
-Moved obstacle model.Obstacle@32144b82 to the right.
-
-
-Tue Mar 29 19:12:08 PDT 2022
-Moved obstacle model.Obstacle@5d2bb922 upwards.
-
-
-Tue Mar 29 19:12:08 PDT 2022
-Moved obstacle model.Obstacle@32f60657 downwards.
-
-
-Tue Mar 29 19:12:08 PDT 2022
-Moved obstacle model.Obstacle@32144b82 to the right.
-
-
-Tue Mar 29 19:12:08 PDT 2022
-Moved obstacle model.Obstacle@5d2bb922 upwards.
-
-
-Tue Mar 29 19:12:08 PDT 2022
-Moved obstacle model.Obstacle@32f60657 downwards.
-
-
-Tue Mar 29 19:12:08 PDT 2022
-Moved obstacle model.Obstacle@32144b82 to the right.
-
-
-Tue Mar 29 19:12:09 PDT 2022
-Moved obstacle model.Obstacle@5d2bb922 upwards.
-
-
-Tue Mar 29 19:12:09 PDT 2022
-Moved obstacle model.Obstacle@32f60657 downwards.
-
-
-Tue Mar 29 19:12:09 PDT 2022
-Moved obstacle model.Obstacle@32144b82 to the right.
+Thu Mar 31 20:23:28 PDT 2022
+Moved obstacle model.Obstacle@439449f0 up
 
 ## Phase 4: task 3:
 

@@ -118,26 +118,23 @@ public class Obstacle implements Writable {
                         pos.getX() + obstacleSpeed,
                         pos.getY()
             );
-            EventLog.getInstance().logEvent(new Event("Moved obstacle " + this + " to the right."));
         } else if (obstacleDirection.equals("left")) {
             pos = new Position(
                         pos.getX() - obstacleSpeed,
                         pos.getY()
             );
-            EventLog.getInstance().logEvent(new Event("Moved obstacle " + this + " to the left."));
         } else if (obstacleDirection.equals("up")) {
             pos = new Position(
                         pos.getX(),
                         pos.getY() - obstacleSpeed
             );
-            EventLog.getInstance().logEvent(new Event("Moved obstacle " + this + " upwards."));
         } else if (obstacleDirection.equals("down")) {
             pos = new Position(
                         pos.getX(),
                         pos.getY() + obstacleSpeed
             );
-            EventLog.getInstance().logEvent(new Event("Moved obstacle " + this + " downwards."));
         }
+        EventLog.getInstance().logEvent(new Event("Moved obstacle " + this + " " + obstacleDirection));
     }
 
     /*
