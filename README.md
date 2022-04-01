@@ -82,3 +82,5 @@ and the other classes have a field of GNGame, through which Game is manipulated.
 -Obstacle and PlayerCharacter both have fields of the class Position, and a point on the map is represented by a 
 Position object. This setup can be refactored into a hierarchy, in which I will create a new class 'Point' and make 
 Position a superclass of PlayerCharacter, Obstacle, and Point.
+
+-The Score Panel can be removed as a field in GNGame and an observer pattern can be set up to update the score instead.
