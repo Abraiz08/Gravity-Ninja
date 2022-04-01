@@ -265,7 +265,10 @@ public class Game implements Writable {
         }
 
         if (ticker == TICKS_PER_SECOND && canSpawnObstacle) {
-            obstacles.add(new Obstacle(pos, WIDTH, HEIGHT));
+            Obstacle o = new Obstacle(pos, WIDTH, HEIGHT);
+            obstacles.add(o);
+            EventLog.getInstance().logEvent(new Event("Spawned obstacle " + o + " at "
+                    + pos.getX() + ", " + pos.getY() + "."));
 
         }
 

@@ -32,3 +32,141 @@ of gravity, using the arrow keys.
 character, and the score to file using the 's' key, or through the menu bar.
 - As a user, I want to be given the option to load my game state from file using the 'l' key, or through the menu bar.
 - As a user, I want to be able to exit the game through then menu bar.
+
+## Phase 4: task 2:
+
+Tue Mar 29 19:12:08 PDT 2022
+Spawned obstacle model.Obstacle@5d2bb922 at 775, 596.
+
+
+Tue Mar 29 19:12:08 PDT 2022
+Spawned obstacle model.Obstacle@32f60657 at 1008, 4.
+
+
+Tue Mar 29 19:12:08 PDT 2022
+Spawned obstacle model.Obstacle@32144b82 at 2, 159.
+
+
+Tue Mar 29 19:12:08 PDT 2022
+Moved obstacle model.Obstacle@5d2bb922 upwards.
+
+
+Tue Mar 29 19:12:08 PDT 2022
+Moved obstacle model.Obstacle@32f60657 downwards.
+
+
+Tue Mar 29 19:12:08 PDT 2022
+Moved obstacle model.Obstacle@32144b82 to the right.
+
+
+Tue Mar 29 19:12:08 PDT 2022
+Moved obstacle model.Obstacle@5d2bb922 upwards.
+
+
+Tue Mar 29 19:12:08 PDT 2022
+Moved obstacle model.Obstacle@32f60657 downwards.
+
+
+Tue Mar 29 19:12:08 PDT 2022
+Moved obstacle model.Obstacle@32144b82 to the right.
+
+
+Tue Mar 29 19:12:08 PDT 2022
+Moved obstacle model.Obstacle@5d2bb922 upwards.
+
+
+Tue Mar 29 19:12:08 PDT 2022
+Moved obstacle model.Obstacle@32f60657 downwards.
+
+
+Tue Mar 29 19:12:08 PDT 2022
+Moved obstacle model.Obstacle@32144b82 to the right.
+
+
+Tue Mar 29 19:12:08 PDT 2022
+Moved obstacle model.Obstacle@5d2bb922 upwards.
+
+
+Tue Mar 29 19:12:08 PDT 2022
+Moved obstacle model.Obstacle@32f60657 downwards.
+
+
+Tue Mar 29 19:12:08 PDT 2022
+Moved obstacle model.Obstacle@32144b82 to the right.
+
+
+Tue Mar 29 19:12:08 PDT 2022
+Moved obstacle model.Obstacle@5d2bb922 upwards.
+
+
+Tue Mar 29 19:12:08 PDT 2022
+Moved obstacle model.Obstacle@32f60657 downwards.
+
+
+Tue Mar 29 19:12:08 PDT 2022
+Moved obstacle model.Obstacle@32144b82 to the right.
+
+
+Tue Mar 29 19:12:08 PDT 2022
+Moved obstacle model.Obstacle@5d2bb922 upwards.
+
+
+Tue Mar 29 19:12:08 PDT 2022
+Moved obstacle model.Obstacle@32f60657 downwards.
+
+
+Tue Mar 29 19:12:08 PDT 2022
+Moved obstacle model.Obstacle@32144b82 to the right.
+
+
+Tue Mar 29 19:12:08 PDT 2022
+Moved obstacle model.Obstacle@5d2bb922 upwards.
+
+
+Tue Mar 29 19:12:08 PDT 2022
+Moved obstacle model.Obstacle@32f60657 downwards.
+
+
+Tue Mar 29 19:12:08 PDT 2022
+Moved obstacle model.Obstacle@32144b82 to the right.
+
+
+Tue Mar 29 19:12:08 PDT 2022
+Moved obstacle model.Obstacle@5d2bb922 upwards.
+
+
+Tue Mar 29 19:12:08 PDT 2022
+Moved obstacle model.Obstacle@32f60657 downwards.
+
+
+Tue Mar 29 19:12:08 PDT 2022
+Moved obstacle model.Obstacle@32144b82 to the right.
+
+
+Tue Mar 29 19:12:09 PDT 2022
+Moved obstacle model.Obstacle@5d2bb922 upwards.
+
+
+Tue Mar 29 19:12:09 PDT 2022
+Moved obstacle model.Obstacle@32f60657 downwards.
+
+
+Tue Mar 29 19:12:09 PDT 2022
+Moved obstacle model.Obstacle@32144b82 to the right.
+
+## Phase 4: task 3:
+
+GravityNinja contains a number of individual components such as PlayerCharacter and Obstacle. The Game class contains 
+each of these classes as fields, and they are initialized as objects. All the behaviour is contained within these 
+classes, and they are all implemented to work with one another in the Game class. The ui uses Game as a field in order 
+to display everything together.
+
+If I had more time to develop this project, I would perform the following refactorings:
+
+-At the moment, each class in the ui package (except SplashScreen) contains a field of the Game class, which is then 
+assigned to be the same game as GNGame in the constructor. I would change it so that there is only one Game in GNGame,
+and the other classes have a field of GNGame, through which Game is manipulated.
+
+-Obstacle and PlayerCharacter both have fields of the class Position, and a point on the map is represented by a 
+Position object. This setup can be refactored into a hierarchy, in which I will create a new class 'Point' and make 
+Position a superclass of PlayerCharacter, Obstacle, and Point.

@@ -1,5 +1,7 @@
 package ui;
 
+import model.Event;
+import model.EventLog;
 import model.Game;
 import persistence.JsonReader;
 
@@ -130,6 +132,7 @@ public class GNGame extends JFrame {
 
         class CloseAction implements ActionListener {
             public void actionPerformed(ActionEvent e) {
+                printLog(EventLog.getInstance());
                 System.exit(0);
             }
         }
@@ -193,11 +196,18 @@ public class GNGame extends JFrame {
     }
 
     /*
-     * EFFECTS: Checks if the game has ended or not
+     * EFFECTS: Checks if the game has ended or not, prints event log if it has
      */
     public void checkGameEnded() {
         if (game.isEnded()) {
             timer.stop();
+            printLog(EventLog.getInstance());
+        }
+    }
+
+    public void printLog(EventLog el) {
+        for (Event next : el) {
+            System.out.println(next.toString() + "\n\n");
         }
     }
 
